@@ -1,0 +1,65 @@
+.signup {
+    width: 50%;
+    border-radius: 5px;
+    background: #333;
+    padding: 20px;
+    margin: auto;
+    opacity: 0.4;
+}
+
+.dob {
+    background: #1abc9c;
+    opacity: 0.4;
+}
+
+#posts {
+    color: red;
+    background-color: #ffffff;
+    border-radius: 3px;
+}
+
+/*Custom codes*/
+.dataView {
+    /*width:50%;*/
+    border-radius: 5px;
+    background: #333;
+    padding: 20px;
+    margin: auto;
+    opacity: 0.4;
+}
+
+.viewNumberDropDown {
+    width: auto;
+    border-radius: 5px;
+    background: #333;
+    margin: auto;
+    opacity: 0.4;
+}
+
+.showResult {
+    padding: 10px;
+    border-bottom: 1px #CDCDCD dashed;
+    font-size: 15px;
+}
+
+.pSize {
+    font-size: large;
+    color: cornsilk;
+}
+
+.dashboard {
+    width: 70%;
+}
+
+.search{
+    border: 2px solid #005599;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    width: auto;
+    background-color: transparent;
+    background-image: none;
+    color: #fff;
+    display: block;
+}
