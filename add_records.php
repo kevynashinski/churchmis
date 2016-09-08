@@ -68,6 +68,7 @@ if(isset($_GET['inserted'])){
                 <li><a href='dashboard.php'>DashBoard</a></li>
                 <li><a href="logout.php">Logout</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
+                 <li><a href="help.php">Helpinfomation</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
