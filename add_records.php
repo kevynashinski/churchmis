@@ -77,9 +77,8 @@ if(isset($_GET['inserted'])){
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
-            <h1 style="text-align:center; font-size:4em;">Welcome to MyGalaxy</h1>
-            <h2 style="text-align:center;">Are you feeling bored? want to have some fun with your friends online?<br>
-                then definately you are in the right place</h2>
+            <h1 style="text-align:center; font-size:4em;">Welcome to churchmis</h1>
+            <h2 style="text-align:center;">an online place for our congregants</h2>
             <h3 style="text-align:center">Enter Record</h3>
         </div>
     </div>
