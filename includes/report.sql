@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2016 at 04:36 PM
+-- Generation Time: Sep 09, 2016 at 12:50 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -113,10 +113,10 @@ CREATE TABLE IF NOT EXISTS `events` (
 --
 
 CREATE TABLE IF NOT EXISTS `men` (
-  `man_id`        INT(10)     NOT NULL,
-  `name`          VARCHAR(30) NOT NULL,
-  `mobile_number` INT(10)     NOT NULL,
-  `email_address` VARCHAR(32) NOT NULL
+  `id`      INT(10)     NOT NULL,
+  `name`    VARCHAR(30) NOT NULL,
+  `contact` INT(10)     NOT NULL,
+  `email`   VARCHAR(32) NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -125,8 +125,9 @@ CREATE TABLE IF NOT EXISTS `men` (
 -- Dumping data for table `men`
 --
 
-INSERT INTO `men` (`man_id`, `name`, `mobile_number`, `email_address`) VALUES
-  (9827345, 'fafa fofo', 2147483647, 'fafan@gmail.com');
+INSERT INTO `men` (`id`, `name`, `contact`, `email`) VALUES
+  (9827345, 'fafa fofo', 2147483647, 'fafan@gmail.com'),
+  (41244, 'ann atieno', 75231655, 'ann3@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -208,10 +209,10 @@ INSERT INTO `purposes` (`purpose`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `women` (
-  `woman_id`      INT(10)     NOT NULL,
-  `woman_name`    VARCHAR(30) NOT NULL,
-  `mobile_number` INT(10)     NOT NULL,
-  `email_address` VARCHAR(32) NOT NULL
+  `id`      INT(10)     NOT NULL,
+  `name`    VARCHAR(30) NOT NULL,
+  `contact` INT(10)     NOT NULL,
+  `email`   VARCHAR(32) NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -220,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `women` (
 -- Dumping data for table `women`
 --
 
-INSERT INTO `women` (`woman_id`, `woman_name`, `mobile_number`, `email_address`) VALUES
+INSERT INTO `women` (`id`, `name`, `contact`, `email`) VALUES
   (762354, '0', 0, '0'),
   (762354, 'meza meza', 0, ''),
   (762354, 'meza meza', 0, ''),
@@ -231,7 +232,8 @@ INSERT INTO `women` (`woman_id`, `woman_name`, `mobile_number`, `email_address`)
   (345464, 'dada dada', 78776569, ''),
   (345464, 'dada dada', 78776569, ''),
   (345464, 'dada dada', 78776569, ''),
-  (345464, 'dada dada', 78776569, '');
+  (345464, 'dada dada', 78776569, ''),
+  (785687, 'nana kanana', 75645456, 'kanana@gmail,com');
 
 -- --------------------------------------------------------
 
@@ -240,10 +242,10 @@ INSERT INTO `women` (`woman_id`, `woman_name`, `mobile_number`, `email_address`)
 --
 
 CREATE TABLE IF NOT EXISTS `youth` (
-  `id`       INT(10)     NOT NULL,
-  `name`     VARCHAR(30) NOT NULL,
-  `phone_no` INT(11)     NOT NULL,
-  `email`    VARCHAR(30) NOT NULL
+  `id`      INT(10)     NOT NULL,
+  `name`    VARCHAR(30) NOT NULL,
+  `contact` INT(11)     NOT NULL,
+  `email`   VARCHAR(30) NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -252,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `youth` (
 -- Dumping data for table `youth`
 --
 
-INSERT INTO `youth` (`id`, `name`, `phone_no`, `email`) VALUES
+INSERT INTO `youth` (`id`, `name`, `contact`, `email`) VALUES
   (12, 'safgvdsg', 0, ''),
   (12, 'safgvdsg', 0, ''),
   (12, 'safgvdsg', 0, ''),
@@ -268,23 +270,8 @@ INSERT INTO `youth` (`id`, `name`, `phone_no`, `email`) VALUES
   (0, 'vava  dada', 0, ''),
   (0, 'vava  dada', 0, ''),
   (0, 'vava  dada', 0, ''),
-  (0, 'vava  dada', 0, '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `youths`
---
-
-CREATE TABLE IF NOT EXISTS `youths` (
-  `id`       INT(11)     NOT NULL,
-  `name`     VARCHAR(32) NOT NULL,
-  `phone no` INT(11)     NOT NULL,
-  `email`    VARCHAR(32) NOT NULL,
-  PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = latin1;
+  (0, 'vava  dada', 0, ''),
+  (787999, 'kevin muya', 2147483647, 'muya@gmail.com');
 
 --
 -- Constraints for dumped tables
