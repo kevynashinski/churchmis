@@ -9,7 +9,7 @@
     include_once 'db_operations.php';
 
     define('HOST', "localhost");
-define('USER', 'fred');
+define('USER', 'kevynashinski');
     define('PASS', 'elegant');
     define('DATABASE', "report");
 
