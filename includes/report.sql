@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2016 at 07:58 AM
--- Server version: 5.5.47-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.14
+-- Generation Time: Sep 08, 2016 at 04:36 PM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -48,7 +48,12 @@ INSERT INTO `auth` (`id_number`, `surname`, `other_name`, `phone_number`, `gende
 (12345, 'wamalwa', 'ian wafula', 708811733, 'Male', 'ianwafula@gmail.com', '$2y$10$z19x3tZmLPVleJAmQjdG7e6BThH0ttHCyanWxlksf7RL/5kTeJwlu', '2016-02-21', 'clerk'),
 (23583687, 'Salah', 'George', 724345641, 'Male', 'sallageo@gmail.com', '$2y$10$DI.uQ8udAzlqFFF5jhDJjun1WdW2VW9gueJUng49t4lFs0v5bjoDa', '2016-02-21', 'superuser'),
 (29483944, 'oyugi', 'zephaniah onyago', 732438794, 'Male', 'zephp3@gmail.com', '$2y$10$RdfwnYSXz9w.m/hq8ch5t.yb1tbEUlT2HzQnFjuIL/iBKlpdenfa2', '2016-02-21', 'clerk'),
-(30776967, 'wekhanya', 'kevin wafula', 729243690, 'Male', 'kevinwafula60@gmail.com', '$2y$10$pdfB7zd.KbQNmjXhK2dFx.LBW.nZfzEr230MOWOActIZ47KV5GEYm', '2016-02-20', 'superuser');
+  (30776967, 'wekhanya', 'kevin wafula', 729243690, 'Male', 'kevinwafula60@gmail.com',
+   '$2y$10$pdfB7zd.KbQNmjXhK2dFx.LBW.nZfzEr230MOWOActIZ47KV5GEYm', '2016-02-20', 'superuser'),
+  (34556667, 'fred', 'nunun', 76543221, 'Male', 'fredwamae34@gmail.com',
+   '$2y$10$aCgNuPmhDSzBDL22sf98me1Ck4vAlz4Zk/15CqeZfyCkHXRM2mJa6', '2016-08-31', 'clerk'),
+  (324252566, 'mwangi', 'fred', 756556666, 'Male', 'fredrickmuriuki97@yahoo.com',
+   '$2y$10$2k0g35pK61AXcdZBEO6sxOz7zEf9QKP5TR8.1qR/xYtd3SRx4IW3q', '2016-08-31', NULL);
 
 -- --------------------------------------------------------
 
@@ -63,7 +68,10 @@ CREATE TABLE IF NOT EXISTS `details` (
   `gender` varchar(7) NOT NULL,
   `registrar` varchar(30) NOT NULL DEFAULT 'admin@admin.com',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1
+  AUTO_INCREMENT = 12;
 
 --
 -- Dumping data for table `details`
@@ -79,7 +87,46 @@ INSERT INTO `details` (`id`, `full_name`, `phone_number`, `gender`, `registrar`)
 (7, 'abdul abdi', 84653132, 'Male', 'admin@admin.com'),
 (8, 'evancia kandie', 47554, 'Female', 'admin@admin.com'),
 (9, 'ian wafula', 708811733, 'Male', 'admin@admin.com'),
-(10, 'griffins adelmo', 726469456, 'Male', 'admin@admin.com');
+  (10, 'griffins adelmo', 726469456, 'Male', 'admin@admin.com'),
+  (11, 'fred muriuki', 719348776, 'Male', 'admin@admin.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE IF NOT EXISTS `events` (
+  `fundraising`    VARCHAR(35) NOT NULL,
+  `trips`          VARCHAR(35) NOT NULL,
+  `church service` VARCHAR(35) NOT NULL,
+  `group meeting`  VARCHAR(35) NOT NULL,
+  UNIQUE KEY `fundraising` (`fundraising`, `trips`, `church service`, `group meeting`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `men`
+--
+
+CREATE TABLE IF NOT EXISTS `men` (
+  `man_id`        INT(10)     NOT NULL,
+  `name`          VARCHAR(30) NOT NULL,
+  `mobile_number` INT(10)     NOT NULL,
+  `email_address` VARCHAR(32) NOT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
+--
+-- Dumping data for table `men`
+--
+
+INSERT INTO `men` (`man_id`, `name`, `mobile_number`, `email_address`) VALUES
+  (9827345, 'fafa fofo', 2147483647, 'fafan@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -115,7 +162,9 @@ INSERT INTO `payments` (`id`, `purpose`, `cash`, `cheque`, `forex`, `receipt_sta
 (8, 'building', 5651651, 0, 0, 0, '2016-02-20'),
 (9, 'education', 50000, 20000, 0, 0, '2016-02-21'),
 (10, 'tithe', 1000, 0, 0, 0, '2016-02-21'),
-(10, 'children', 0, 50000, 0, 0, '2016-02-21');
+  (10, 'children', 0, 50000, 0, 0, '2016-02-21'),
+  (11, 'education', 45000, 0, 1, 0, '2016-08-31'),
+  (11, 'children', 0, 0, 0, 0, '2016-08-31');
 
 -- --------------------------------------------------------
 
@@ -152,6 +201,91 @@ INSERT INTO `purposes` (`purpose`) VALUES
 ('world mission'),
 ('building funds');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `women`
+--
+
+CREATE TABLE IF NOT EXISTS `women` (
+  `woman_id`      INT(10)     NOT NULL,
+  `woman_name`    VARCHAR(30) NOT NULL,
+  `mobile_number` INT(10)     NOT NULL,
+  `email_address` VARCHAR(32) NOT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
+--
+-- Dumping data for table `women`
+--
+
+INSERT INTO `women` (`woman_id`, `woman_name`, `mobile_number`, `email_address`) VALUES
+  (762354, '0', 0, '0'),
+  (762354, 'meza meza', 0, ''),
+  (762354, 'meza meza', 0, ''),
+  (762354, 'meza meza', 0, ''),
+  (67246324, 'toto toto', 73273, ''),
+  (67246324, 'toto toto', 73273, ''),
+  (67246324, 'moto toto', 631651, ''),
+  (345464, 'dada dada', 78776569, ''),
+  (345464, 'dada dada', 78776569, ''),
+  (345464, 'dada dada', 78776569, ''),
+  (345464, 'dada dada', 78776569, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `youth`
+--
+
+CREATE TABLE IF NOT EXISTS `youth` (
+  `id`       INT(10)     NOT NULL,
+  `name`     VARCHAR(30) NOT NULL,
+  `phone_no` INT(11)     NOT NULL,
+  `email`    VARCHAR(30) NOT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
+--
+-- Dumping data for table `youth`
+--
+
+INSERT INTO `youth` (`id`, `name`, `phone_no`, `email`) VALUES
+  (12, 'safgvdsg', 0, ''),
+  (12, 'safgvdsg', 0, ''),
+  (12, 'safgvdsg', 0, ''),
+  (12, 'safgvdsg', 0, ''),
+  (23344, 'fdfbxfhfxn', 0, ''),
+  (535636, 'sfdhgvsanmvc', 0, ''),
+  (535636, 'sfdhgvsanmvc', 0, ''),
+  (535636, 'sfdhgvsanmvc', 0, ''),
+  (424255632, 'fgdghzxxgj', 0, ''),
+  (67164126, 'gogo bobo', 0, ''),
+  (67164126, 'gogo bobo', 0, ''),
+  (765678, 'dudu dada', 99887676, 'dudu@gmail.com'),
+  (0, 'vava  dada', 0, ''),
+  (0, 'vava  dada', 0, ''),
+  (0, 'vava  dada', 0, ''),
+  (0, 'vava  dada', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `youths`
+--
+
+CREATE TABLE IF NOT EXISTS `youths` (
+  `id`       INT(11)     NOT NULL,
+  `name`     VARCHAR(32) NOT NULL,
+  `phone no` INT(11)     NOT NULL,
+  `email`    VARCHAR(32) NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
 --
 -- Constraints for dumped tables
 --
@@ -165,7 +299,7 @@ ALTER TABLE `payments`
 --
 -- Constraints for table `priviledges`
 --
-ALTER TABLE privileges
+ALTER TABLE `priviledges`
   ADD CONSTRAINT `fk_user_priviledges` FOREIGN KEY (`username`) REFERENCES `auth` (`username`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

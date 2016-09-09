@@ -9,7 +9,7 @@
     include_once 'db_operations.php';
 
     define('HOST', "localhost");
-    define('USER', 'kevynashinski');
+define('USER', 'fred');
     define('PASS', 'elegant');
     define('DATABASE', "report");
 
@@ -40,4 +40,4 @@
         echo 'Error Occurred during connection ' . $e->getMessage();
     }
 
-    $connection = new db_operations($DB_CONN);
+$connection = new db_operations($DB_CONN);

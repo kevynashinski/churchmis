@@ -56,8 +56,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="index.php">Home</a></li>
                 <li class="active"><a href="login.php">Login</a></li>
+
                 <li><a href="contact.php">Contact Us</a></li>
-                <li><a href="help.php">Helpinfomation</a></li>
+                <li><a href="news.php">news</a></li>
         </div><!--/.nav-collapse -->
     </div>
 
@@ -66,10 +67,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
-            <h1 style="text-align:center; font-size:4em;">Welcome back to MyGalaxy</h1>
-            <h2 style="text-align:center;">Are you feeling bored? want to have some fun with your friends online?<br>
-                then definately you are in the right place</h2>
-            <h3 style="text-align:center">Please Login Below</h3>
+            <h1 style="text-align:center; font-size:4em;">Welcome back to churchMIS</h1>
+            <h2 style="text-align:center;">our aim is to bring together the members of our congregation</h2>
+            <h3 style="text-align:center">Please Login Below for new member registration</h3>
         </div>
     </div>
 
