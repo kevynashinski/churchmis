@@ -1,5 +1,6 @@
 <?php
 include_once 'includes/config.php';
+include_once 'includes/db_operations.php';
     session_start();
     if ($_SESSION[USERNAME] == "") {
         header("location:login.php");
@@ -16,7 +17,7 @@ include_once 'includes/config.php';
         $otherName = $result[OTHER_NAME];
         $gender = $result[GENDER];
         $id_number = $result[ID_NUMBER];
-        $email = $result[EMAIL];
+        $email = $result[USERNAME];
 
         $photo = $result['photo'];
         $phototype = $result['phototype'];
@@ -36,10 +37,10 @@ include_once 'includes/config.php';
             $imagesize = getimagesize($upload_image);
 
             $imgtype = $imagesize['mime'];
-            $sql_profile = "UPDATE users SET photo ='$image',phototype = '$imgtype' WHERE uid = '$_SESSION[uid]'";
-            $sql_profile_query = mysqli_query($connect, $sql_profile);
 
-            if ($sql_profile_query) {
+//            $sql_profile_query = mysqli_query($connect, $sql_profile);
+
+            if (db_operations::updatePhoto($image, $imgtype, $_SESSION[USERNAME])) {
                 header("Location:dashboard.php");
                 exit;
             } else {
@@ -79,8 +80,7 @@ include_once 'includes/config.php';
                 <li><a href="dashboard.php"><span class="glyphicon glyphicon-user"></span>
                         Welcome, <?php echo $surname . '&nbsp;' . $otherName; ?></a></li>
                 <li class="active"><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="profile.php">My Spaceship</a></li>
-<!--                <li><a href="guardians.php">Guardians <span class="badge">--><?php //echo $sql_mem; ?><!--</span></a></li>-->
+                <li><a href="profile.php">My Profile</a></li>
                 <li><a href="logout.php">Let me out</a></li>
                 <li><a href="changepassword.php">Settings <span class="glyphicon glyphicon-cog"></span></a></li>
         </div><!--/.nav-collapse -->

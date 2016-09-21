@@ -44,7 +44,8 @@ CREATE TABLE IF NOT EXISTS `auth` (
 -- Dumping data for table `auth`
 --
 
-INSERT INTO `auth` (`id_number`, `surname`, `other_name`, `phone_number`, `gender`, `username`, `password`, `registered_date`, `role`) VALUES
+INSERT INTO users (`id_number`, `surname`, `other_name`, `phone_number`, `gender`, `username`, `password`, `registered_date`, `role`)
+VALUES
 (12345, 'wamalwa', 'ian wafula', 708811733, 'Male', 'ianwafula@gmail.com', '$2y$10$z19x3tZmLPVleJAmQjdG7e6BThH0ttHCyanWxlksf7RL/5kTeJwlu', '2016-02-21', 'clerk'),
 (23583687, 'Salah', 'George', 724345641, 'Male', 'sallageo@gmail.com', '$2y$10$DI.uQ8udAzlqFFF5jhDJjun1WdW2VW9gueJUng49t4lFs0v5bjoDa', '2016-02-21', 'superuser'),
 (29483944, 'oyugi', 'zephaniah onyago', 732438794, 'Male', 'zephp3@gmail.com', '$2y$10$RdfwnYSXz9w.m/hq8ch5t.yb1tbEUlT2HzQnFjuIL/iBKlpdenfa2', '2016-02-21', 'clerk'),
@@ -287,7 +288,7 @@ ALTER TABLE `payments`
 -- Constraints for table `priviledges`
 --
 ALTER TABLE `priviledges`
-  ADD CONSTRAINT `fk_user_priviledges` FOREIGN KEY (`username`) REFERENCES `auth` (`username`);
+  ADD CONSTRAINT `fk_user_priviledges` FOREIGN KEY (`username`) REFERENCES users (`username`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

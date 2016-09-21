@@ -34,6 +34,11 @@ define('USER', 'kevynashinski');
     define('PASSWORD','password');
     define('ROLE','role');
 
+define("MPESA_CODE", "mpesa_code");
+define("DATE", "date");
+define("TIME", "time");
+define("AMOUNT", "amount");
+
     try {
         $DB_CONN = new PDO("mysql:host=" . HOST . ";dbname=" . DATABASE, USER, PASS);
     } catch (PDOException $e) {

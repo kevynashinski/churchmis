@@ -5,27 +5,27 @@
 //exit;
 //}
 include 'includes/config.php';
+include_once 'includes/session.php';
+include_once 'includes/db_operations.php';
 
-	$sql_result = "SELECT * FROM users WHERE uid = '$_SESSION[uid]'";
-	$sql_result_query = mysqli_query($connect,$sql_result);
+$row = db_operations::getUserByUsername($_SESSION[USERNAME]);
 
-	if($sql_result_query) {
-		$row = mysqli_fetch_array($sql_result_query);
-		$uid = $row['uid'];
-		$fname = $row['fname'];
-		$sname = $row['sname'];
-		$gender = $row['gender'];
-		$IDNO = $row['IDNO'];
-		$email = $row['email'];
-		$pass = $row['pass'];
+if ($row != null) {
+    $uid = $row[USERNAME];
+    $fname = $row[SURNAME];
+    $sname = $row[OTHER_NAME];
+    $gender = $row[GENDER];
+    $IDNO = $row[ID_NUMBER];
+    $email = $row[USERNAME];
+//		$pass = $row['pass'];
 		$city = $row['city'];
-		$dob = $row['dob'];
+//		$dob = $row['dob'];
 		$photo = $row['photo'];
 		$phototype = $row['phototype'];
 		} else {
-			echo "Howdy, There is an error. Please try again";
+    echo "There is an error Retriving your info. Please try again";
 		}
-		$date = date("d-m-Y", strtotime($dob));
+//		$date = date("d-m-Y", strtotime($dob));
 // upload image in form
 //set variable to empty
 $upload_image = $error = $empty_im = $uploadsuccess="";
@@ -42,12 +42,13 @@ if(isset($_POST['upload_profile']))
 	  $imagesize = getimagesize($upload_image);
 
 	  $imgtype = $imagesize['mime'];
-      $sql_profile = "UPDATE users SET photo ='$image',phototype = '$imgtype' WHERE uid = '$_SESSION[uid]'";
-	  $sql_profile_query = mysqli_query($connect,$sql_profile);
+      $sql_profile = "UPDATE auth SET photo ='$image',phototype = '$imgtype' WHERE username = '$_SESSION[USERNAME]'";
+//	  $sql_profile_query = mysqli_query($connect,$sql_profile);
 
-	  if($sql_profile_query)
+//	  if($sql_profile_query)
+      if (db_operations::getDBCONN()->query($sql_profile))
 	  {
-	     $uploadsuccess = "<div class='alert alert-info'>Hurray! Profile Pic Update Successful!</div>";
+          $uploadsuccess = "<div class='alert alert-info'>Profile Pic Update Successful!</div>";
 		 //header("Location:profile.php");
 		 //exit;
 	  }
@@ -62,26 +63,25 @@ if(isset($_POST['upload_profile']))
 		$success = $empty = $error = "";
 		if(isset($_POST['update']))
 		{
-			if($_POST['fname'] != "" and $_POST['sname'] != "" and $_POST['email'] != "" and $_POST['gender'] != "" and $_POST['IDNO'] != "" and $_POST['city'] != "" and $_POST['dob'] != "" )
+            if (isset($_REQUEST[OTHER_NAME]) != "" and isset($_REQUEST[SURNAME]) != "" and isset($_REQUEST[USERNAME]) != "" and isset($_REQUEST[GENDER]) != "" and isset($_REQUEST[ID_NUMBER]) != "" and isset($_REQUEST['city']) != "")
 			{
-				$fname = test_input($_POST['fname']);
-				$sname = test_input($_POST['sname']);
-				$email = test_input($_POST['email']);
-				$gender = test_input($_POST['gender']);
-				$IDNO = test_input($_POST['IDNO']);
-				$city = test_input($_POST['city']);
-				$dob = test_input($_POST['dob']);
-				$sql_update = "UPDATE users SET fname = '$fname',sname='$sname',email = '$email',gender = '$gender',IDNO = '$IDNO',city ='$city',dob = '$dob'  WHERE uid = '$_SESSION[uid]'";
-				$sql_update_query = mysqli_query($connect,$sql_update);
-				if($sql_update_query)
+                $fname = $_REQUEST[OTHER_NAME];
+                $sname = $_REQUEST[SURNAME];
+                $email = $_REQUEST[USERNAME];
+                $gender = $_REQUEST[GENDER];
+                $IDNO = $_REQUEST[ID_NUMBER];
+                $city = $_REQUEST['city'];
+                $sql_update = "UPDATE auth SET other_name = '$fname',surname='$sname',username = '$email',gender = '$gender',id_number = '$IDNO',city ='$city'  WHERE username = '$_SESSION[USERNAME]'";
+//				$sql_update_query = mysqli_query($connect,$sql_update);
+                if (db_operations::getDBCONN()->query($sql_update))
 				{
-					$sql_update_posts = "UPDATE posts set fullname = '$fname $sname' WHERE uid = '$_SESSION[uid]'";
-					$sql_update_posts_query = mysqli_query($connect,$sql_update_posts);
-						$success="<div class='alert alert-info'>Hurray! You have successfully updated your data</div>";
+//					$sql_update_posts = "UPDATE posts set fullname = '$fname $sname' WHERE uid = '$_SESSION[uid]'";
+//					$sql_update_posts_query = mysqli_query($connect,$sql_update_posts);
+                    $success = "<div class='alert alert-info'>You have successfully updated your data</div>";
 				}
 				else
 				{
-					$error = "<br>Error Updating details<br>".mysqli_error($connect);
+                    $error = "<br>Error Updating details<br>";
 				}
 			}
 			else
@@ -120,10 +120,12 @@ if(isset($_POST['upload_profile']))
 		</div>
 		<div id="navbar" class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li><a href="dashboard.php"><span class="glyphicon glyphicon-user"></span> Howdy, <?php echo $fname.'&nbsp;'.$sname?></a></li>
+              <li><a href="dashboard.php"><span class="glyphicon glyphicon-user"></span>
+                      Hi, <?php echo $fname . '&nbsp;' . $sname ?></a></li>
 			<li><a href="dashboard.php">Dashboard</a></li>
-			<li class="active"><a href="profile.php">My Spaceship</a></li>
-			<li><a href="guardians.php">Guardians <span class="badge"><?php echo $sql_mem;?></span></a></li>
+              <li class="active"><a href="profile.php">My Profile</a></li>
+              <!--			<li><a href="guardians.php">Guardians <span class="badge">-->
+              <?php //echo $sql_mem;?><!--</span></a></li>-->
 			<li><a href="logout.php">Let me out</a></li>
 			<li><a href="changepassword.php">Settings <span class="glyphicon glyphicon-cog"></span></a></li>
         </div><!--/.nav-collapse -->
@@ -134,7 +136,7 @@ if(isset($_POST['upload_profile']))
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12 col-md-5">
-			<h2 class="page-header"> Your Awesome Pic!</h2>
+            <h2 class="page-header"> My Photo</h2>
 			<?php
 
 				if($phototype == "")
@@ -153,7 +155,8 @@ if(isset($_POST['upload_profile']))
 				{
 				  ?>
 				  <!-- Image from database -->
-				  <img src="imageselect.php?unique=<?php echo $uid;?>" class="img-rounded" alt="<?php echo $fname.$sname;?>" width="80%" >
+                    <img src="imageselect.php?unique=<?php echo $_SESSION[USERNAME]; ?>" class="img-rounded"
+                         alt="<?php echo $fname . " " . $sname; ?>" width="80%">
 				<?php
 				}
 				?>
@@ -166,7 +169,7 @@ if(isset($_POST['upload_profile']))
 				</form>
 		</div>
 		<div class="col-sm-12 col-md-7">
-			<h2 class="page-header">Your Awesome Bio!</h2>
+            <h2 class="page-header">My Bio!</h2>
 			<form role="form"  method="POST">
 				<?php echo $success; ?>
 				<div class="form-group">
@@ -190,9 +193,10 @@ if(isset($_POST['upload_profile']))
 				<div class="form-group">
 					<input type="text" placeholder="City" value="<?php echo $city ?>" name="city" class="form-control" required>
 				</div>
-				<div class="form-group">
-							<label for="dob">Date Of Birth</label> <input type="date" name="dob" class="form-control" value="<?php echo $dob; ?>" required>
-				</div>
+                <!--				<div class="form-group">-->
+                <!--							<label for="dob">Date Of Birth</label> <input type="date" name="dob" class="form-control" value="-->
+                <?php //echo $dob; ?><!--" required>-->
+                <!--				</div>-->
 				<a href="delete.php" class="btn btn-danger">Delete Account</a>
 				<input type="submit" name="update" class="btn btn-info" value="Update Bio">
 			</form>

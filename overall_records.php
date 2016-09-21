@@ -15,7 +15,7 @@ include_once 'includes/config.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="classwork, follwoing, chatting, liking">
-    <title>MyGalaxy | Social for all</title>
+    <title>ChurchMis</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="shortcut icon" href="images/favicon.png">
@@ -40,6 +40,7 @@ include_once 'includes/config.php';
                 <!--                <li class="active"><a href="">Hi -->
                 <?php //echo $_SESSION['username']?><!--</a></li>-->
                 <li><a href='dashboard.php'>DashBoard</a></li>
+                <li><a href="mpesa.php">Mpesa Transactions</a></li>
                 <li><a href="logout.php">Logout</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
             </ul>
@@ -50,10 +51,7 @@ include_once 'includes/config.php';
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
-            <h1 style="text-align:center; font-size:4em;">Welcome to MyGalaxy</h1>
-            <h2 style="text-align:center;">Are you feeling bored? want to have some fun with your friends online?<br>
-                then definately you are in the right place</h2>
-            <h3 style="text-align:center">Enter Record</h3>
+            <h1 style="text-align:center; font-size:4em;">Welcome to ChurchMis</h1>
         </div>
     </div>
 
