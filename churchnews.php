@@ -118,8 +118,8 @@ include_once 'includes/config.php';
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12">
-                <h1 style="text-align:center; font-size:4em;">Contacts</h1>
-                <h2 style="text-align:center;">You can easily reach us via: </h2>
+                <h1 style="text-align:center; font-size:4em;">churchmembers</h1>
+                <h2 style="text-align:center;">concerning the visitation by the cardinal: </h2>
             </div>
         </div>
 
@@ -127,9 +127,10 @@ include_once 'includes/config.php';
 
     <div class="container">
         <div class="dataView">
-            <h2>Email: support@church.info</h2>
-            <h2>Phone: +254716 567234</h2>
-            <h2>Mobile: +254723 334678</h2>
+            <h2>date: 29 october 2016</h2>
+            <h2>Phone: our churh</h2>
+            <h2>Mobile:we wish to welcome all our members for a mass to be conducted by the cardinal in our
+                church.please avail yourselves in time</h2>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
