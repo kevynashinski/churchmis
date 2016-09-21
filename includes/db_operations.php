@@ -18,6 +18,14 @@
             self::$DB_CONN = $connection;
         }
 
+        /**
+         * @return PDO
+         */
+        public static function getDBCONN()
+        {
+            return self::$DB_CONN;
+        }
+
         public static function addUserRecord($fullName, $phoneNumber, $gender, $purposes, $cash, $cheque, $forex) {
             $status = false;
             try {
@@ -67,7 +75,7 @@
 
                 $newPassword = password_hash($password, PASSWORD_DEFAULT);
 
-                $query = "INSERT INTO auth(id_number, surname, other_name, phone_number, gender, username, password, registered_date) VALUES (?,?,?,?,?,?,?,now())";
+                $query = "INSERT INTO users(id_number, surname, other_name, phone_number, gender, username, password, registered_date) VALUES (?,?,?,?,?,?,?,now())";
 
                 $stmt = self::$DB_CONN->prepare($query);
                 $stmt->bindParam(1, $id_number);
@@ -78,10 +86,46 @@
                 $stmt->bindParam(6, $email);
                 $stmt->bindParam(7, $newPassword);
 
-                $stmt->execute();
+                if ($stmt->execute()) {
+                    return true;
+                }
+            } catch (PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+            return false;
+        }
 
+        public static function updatePhoto($image, $imgtype, $username)
+        {
+            try {
+                $sql_profile = "UPDATE users SET photo ='$image',phototype = '$imgtype' WHERE username = '$username'";
+
+                $stmt = self::$DB_CONN->prepare($sql_profile);
+                if ($stmt->execute()) {
                 return true;
+                }
 
+            } catch (PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+            return false;
+        }
+
+        public static function saveMpesaTransaction($mpesaCode, $fullName, $amount, $date, $time)
+        {
+            try {
+                $sql = "insert into mpesa(mpesa_code, full_name, date, time, amount) VALUES (?,?,?,?,?)";
+
+                $stmt = self::$DB_CONN->prepare($sql);
+                $stmt->bindParam(1, $mpesaCode);
+                $stmt->bindParam(2, $fullName);
+                $stmt->bindParam(3, $date);
+                $stmt->bindParam(4, $time);
+                $stmt->bindParam(5, $amount);
+
+                if ($stmt->execute()) {
+                    return true;
+            }
             } catch (PDOException $e) {
                 echo 'Error: ' . $e->getMessage();
             }
@@ -90,36 +134,43 @@
 
         public static function getUsers(){
             try{
-                $query="select id_number,surname,other_name,gender,username,registered_date,role from auth";
+                $query = "select id_number,surname,other_name,gender,username,registered_date,role from users";
                 $stmt=self::$DB_CONN->query($query);
                 $result=$stmt->fetch();
 
 
             }catch(PDOException $e){
-                echo 'Erro: '.$e->getMessage();
+                echo 'Error: ' . $e->getMessage();
             }
-
         }
 
+        /**
+         * @param $username
+         * @return $result : User Details of the user
+         */
         public static function getUserByUsername($username) {
             $stmt=null;
             try{
-                $query = "SELECT * FROM auth WHERE username=?";
+                $query = "SELECT * FROM users WHERE username=? LIMIT 1";
 
                 $stmt = self::$DB_CONN->prepare($query);
                 $stmt->bindParam(1, $username);
-                $stmt->execute();
+                $result = $stmt->execute();
 
+                $row = $stmt->fetch();
+
+                if ($result) {
+                    return $row;
+                }
             }catch(PDOException $e){
                 echo 'Error: '.$e->getMessage();
             }
-
-            return $stmt;
+            return null;
         }
 
         public static function login($username, $password) {
             try {
-                $query = "SELECT * FROM auth WHERE username=? LIMIT 1";
+                $query = "SELECT * FROM users WHERE username=? LIMIT 1";
 
                 $stmt = self::$DB_CONN->prepare($query);
                 $stmt->bindParam(1, $username);
@@ -212,6 +263,32 @@
 
             } catch (PDOException $e) {
                 return 'Error: ' . $e->getMessage();
+            }
+        }
+
+        public static function getMpesaTransactions($query)
+        {
+            try {
+                $no = 1;
+                $amount = 0;
+
+                $result = self::$DB_CONN->query($query);
+
+                foreach ($result as $item) {
+                    echo ' 
+ <tr>
+                    <td>' . $no . '</td>
+			<td>' . $item[MPESA_CODE] . '</td>
+			<td>' . $item[FULL_NAME] . '</td>
+			<td>' . number_format($item[AMOUNT]) . '</td>
+			<td>' . $item[DATE] . '</td>
+			<td>' . $item[TIME] . '</td>
+                    </tr>
+                    ';
+                }
+
+            } catch (PDOException $e) {
+                echo "Error " . $e->getMessage();
             }
         }
 

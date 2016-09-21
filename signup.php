@@ -36,7 +36,7 @@
     }
 
     if (isset($_GET['inserted'])) {
-        $message = "<div class='alert alert-info'><strong>Successfully Registered!!!.</strong> <a href='index.php'><u>Home</u></a> </div>";
+        $message = "<div class='alert alert-info'><strong>Successfully Registered!!! Your Account is Awaiting Approval .</strong> <a href='index.php'><u>Home</u></a> </div>";
     } else if (isset($_GET['failure'])) {
         $message = "<div class='alert btn-danger'><i class='glyphicon glyphicon-warning-sign'></i>Failed to Save the Details. Try again </div>";
     }
@@ -47,7 +47,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="classwork, following, chatting, liking">
-    <title>MyGalaxy | Social for all</title>
+    <title>ChurchMIS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="shortcut icon" href="images/favicon.png">
@@ -80,10 +80,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
-            <h1 style="text-align:center; font-size:4em;">Welcome to MyGalaxy</h1>
-            <h2 style="text-align:center;">Are you feeling bored? want to have some fun with your friends online?<br>
-                then definately you are in the right place</h2>
-            <h3 style="text-align:center">Sign Up Below</h3>
+            <h1 style="text-align:center; font-size:4em;">Welcome to ChurchMIS</h1>
+            <h2 style="text-align:center;">Want to be a member, participate in fundraisers and other activities?</h2>
+            <h3 style="text-align:center">Create an Account Below</h3>
         </div>
     </div>
 
@@ -101,7 +100,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="text" placeholder="SurName" name="surname" class="form-control" required>
+                            <input type="text" placeholder="Surname" name="surname" class="form-control" required>
                         </div>
 
                         <div class="form-group">

@@ -42,7 +42,7 @@ if(isset($_GET['inserted'])){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="classwork, follwoing, chatting, liking">
-    <title>MyGalaxy | Social for all</title>
+    <title>ChurchMis</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="shortcut icon" href="images/favicon.png">
@@ -64,7 +64,7 @@ if(isset($_GET['inserted'])){
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="">Hi <?php echo $_SESSION['username'] ?></a></li>
+                <li class="active"><a href="">Hi <?php echo $_SESSION[USERNAME] ?></a></li>
                 <li><a href='dashboard.php'>DashBoard</a></li>
                 <li><a href="logout.php">Logout</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
@@ -77,8 +77,7 @@ if(isset($_GET['inserted'])){
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
-            <h1 style="text-align:center; font-size:4em;">Welcome to churchmis</h1>
-            <h2 style="text-align:center;">an online place for our congregants</h2>
+            <h1 style="text-align:center; font-size:4em;">Welcome to churchMis</h1>
             <h3 style="text-align:center">Enter Record</h3>
         </div>
     </div>

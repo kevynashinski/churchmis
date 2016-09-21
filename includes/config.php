@@ -9,7 +9,7 @@
     include_once 'db_operations.php';
 
     define('HOST', "localhost");
-define('USER', 'fred');
+define('USER', 'kevynashinski');
     define('PASS', 'elegant');
     define('DATABASE', "report");
 
@@ -33,6 +33,11 @@ define('USER', 'fred');
     define('EMAIL','email');
     define('PASSWORD','password');
     define('ROLE','role');
+
+define("MPESA_CODE", "mpesa_code");
+define("DATE", "date");
+define("TIME", "time");
+define("AMOUNT", "amount");
 
     try {
         $DB_CONN = new PDO("mysql:host=" . HOST . ";dbname=" . DATABASE, USER, PASS);
