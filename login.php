@@ -37,7 +37,7 @@
     <title>churchmis </title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="shortcut icon" href="images/favicon.png">
+
 </head>
 <body class="bgmain">
 <nav class="navbar navbar-default navbar-static-top">
@@ -68,7 +68,6 @@
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
             <h1 style="text-align:center; font-size:4em;">Welcome to churchMIS</h1>
-            <h2 style="text-align:center;">our aim is to bring together the members of our congregation</h2>
             <h3 style="text-align:center">Please Login Below for new member registration</h3>
         </div>
     </div>

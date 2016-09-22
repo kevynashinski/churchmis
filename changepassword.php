@@ -4,14 +4,15 @@ if($_SESSION['uid'] ==""){
 header("location:login.php");
 exit;
 }
-include 'includes/connect.php';
+
+include 'includes/config.php';
 // set variables to empty
 	$email_log = $pass_log = "";
 	$email_logErr = $pass_logErr = $error = "";
 //fetching user info from the database
-$sql_result = "SELECT * FROM users WHERE uid = '$_SESSION[uid]'";
+$sql_result = "SELECT * FROM users WHERE username = '$_SESSION[uid]'";
 	$sql_result_query = mysqli_query($connect,$sql_result);
-	
+
 	if($sql_result_query) {
 		$row = mysqli_fetch_array($sql_result_query);
 		$uid = $row['uid'];
@@ -28,50 +29,50 @@ $sql_result = "SELECT * FROM users WHERE uid = '$_SESSION[uid]'";
 			echo "Howdy, There is an error. Please try again";
 		}
 
-		
+
 //changing password
 	$success = $mismatch = $mismatches = $error = $shortpass="";
 	if(isset($_POST['change_pass'])){
-		
+
 		$pass = test_input($_POST['pass']);
 		$newpass = test_input($_POST['newpass']);
 		$newpass2 = test_input($_POST['newpass2']);
-		
+
 		$sql_result = "SELECT * FROM users WHERE uid = '$_SESSION[uid]'";
 		$sql_result_query = mysqli_query($connect,$sql_result);
-		
+
 		$get_pass = $row['pass'];
-		
+
 		if(md5($pass) == $get_pass){
 			if(strlen($newpass) > 6){
 			if($newpass == $newpass2){
 				$sql_update = "UPDATE users SET pass = '".md5($newpass)."' WHERE $uid='$_SESSION[uid]'";
 				$sql_update_query = mysqli_query($connect,$sql_update);
-				
-					if($sql_update_query)
+
+				if($sql_update_query)
 				{
-					
-						$success="<div class='alert alert-info'>Hurray! You have successfully changed your password</div>";
+
+					$success="<div class='alert alert-info'>Hurray! You have successfully changed your password</div>";
 				}
 				else
 				{
 					$error = "<br>Error Updating your password<br>".mysqli_error($connect);
 				}
-				
-				
+
+
 			}else {
 				$mismatch= "<div class='alert alert-info'>Howdy, Your new password do not match.</div>";
 			}
-			}else { 
+			} else {
 			$shortpass= "<div class='alert alert-info'>New password must be longer than 6 characters</div>";
 			}
 		}else {
 			$mismatches = "<div class='alert alert-info'>Howdy, Your new password missmatches with the current password</div>";
-			
+
 		}
 		}
-		
-	
+
+
 ?>
 <html>
 <html lang="en-US">
@@ -94,14 +95,14 @@ $sql_result = "SELECT * FROM users WHERE uid = '$_SESSION[uid]'";
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>			
+			<a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li><a href="dashboard.php"><span class="glyphicon glyphicon-user"></span> Howdy, <?php echo $fname.'&nbsp;'.$sname;?></a></li>	
+			  <li><a href="dashboard.php"><span class="glyphicon glyphicon-user"></span>
+					  Howdy, <?php echo $fname . '&nbsp;' . $sname; ?></a></li>
 			<li><a href="dashboard.php">Dashboard</a></li>
-			<li><a href="profile.php">My Spaceship</a></li>
-			<li><a href="guardians.php">Guardians <span class="badge"><?php echo $sql_mem;?></span></a></li>
+			  <li><a href="profile.php">My Profile</a></li>
 			<li><a href="logout.php">Let me out</a></li>
 			<li class="active"><a href="changepassword.php">Settings <span class="glyphicon glyphicon-cog"></span></a></li>
         </div><!--/.nav-collapse -->
@@ -115,8 +116,8 @@ $sql_result = "SELECT * FROM users WHERE uid = '$_SESSION[uid]'";
 				<h3 style="text-align:center">Change your password below</h3>
 			</div>
 		</div>
-		
-	<div class="container">
+
+		<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-lg-12 col-sm-12">
 				<div class="signup">
@@ -135,7 +136,7 @@ $sql_result = "SELECT * FROM users WHERE uid = '$_SESSION[uid]'";
 							 <input type="password" placeholder="New Password" name="newpass" class="form-control" >
 							 <?php echo $email_logErr;?>
 						</div>
-						
+
 						<div class="form-group">
 							 <input type="password" placeholder="Confirm Password" name="newpass2" class="form-control" >
 							 <?php echo $pass_logErr;?>
@@ -145,7 +146,7 @@ $sql_result = "SELECT * FROM users WHERE uid = '$_SESSION[uid]'";
 					</form>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 	</div>
