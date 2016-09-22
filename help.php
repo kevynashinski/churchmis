@@ -14,7 +14,7 @@ include_once 'includes/config.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="classwork, follwoing, chatting, liking">
-    <title>MyGalaxy | Social for all</title>
+    <title>church mis</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="shortcut icon" href="images/favicon.png">
