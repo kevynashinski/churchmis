@@ -18,7 +18,7 @@ include_once 'includes/config.php';
     <title>ChurchMis</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="shortcut icon" href="images/favicon.png">
+
 
 </head>
 <body class="bgmain">

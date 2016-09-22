@@ -1,37 +1,35 @@
 <?php
-    require_once 'includes/config.php';
+include_once 'includes/config.php';
 //    include_once 'includes/session.php';
 
     $message = "";
 
-    if (isset($_POST['submit'])) {
+if (isset($_REQUEST['submit'])) {
 
-        $id_number = $_POST[ID_NUMBER];
-        $surname = $_POST[SURNAME];
-        $other_name = $_POST[OTHER_NAME];
-        $phone_number = $_POST[PHONE_NUMBER];
-        $gender = $_POST[GENDER];
-        $username = $_POST[EMAIL];
-        $password = $_POST[PASSWORD];
+    $id_number = $_REQUEST[ID_NUMBER];
+    $surname = $_REQUEST[SURNAME];
+    $other_name = $_REQUEST[OTHER_NAME];
+    $phone_number = $_REQUEST[PHONE_NUMBER];
+    $gender = $_REQUEST[GENDER];
+    $username = $_REQUEST[EMAIL];
+    $password = $_REQUEST[PASSWORD];
 
-        if ($password != $_POST['pass']) {
+    if ($password != $_REQUEST['pass']) {
             $message = "<div class='alert btn-danger'>Passwords don't match </div>";
         } else {
             //validate if the fields are there
             $result = db_operations::getUserByUsername($username);
-            if ($result != null) {
-                $row = $result->fetch();
-
-                if ($row[USERNAME] == $username) {
+//
+        if ($result[USERNAME] == $username) {
                     $message = "<div class='alert btn-danger'><i class='glyphicon glyphicon-warning-sign'></i> Email Address Already Exists</div>";
                 } else {
                     if (db_operations::registerUser($id_number, $surname, $other_name, $phone_number, $gender, $username, $password)) {
+//                        header('Location: signup.php?inserted');
                         header('Location: signup.php?inserted');
                     } else {
                         header('Location: signup.php?failure');
                     }
                 }
-            }
         }
     }
 

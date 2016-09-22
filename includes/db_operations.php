@@ -75,7 +75,7 @@
 
                 $newPassword = password_hash($password, PASSWORD_DEFAULT);
 
-                $query = "INSERT INTO users(id_number, surname, other_name, phone_number, gender, username, password, registered_date) VALUES (?,?,?,?,?,?,?,now())";
+                $query = "INSERT INTO users(id_number, surname, other_name, phone_number, gender, username, password) VALUES (?,?,?,?,?,?,?)";
 
                 $stmt = self::$DB_CONN->prepare($query);
                 $stmt->bindParam(1, $id_number);

@@ -58,7 +58,7 @@
                 <li class="active"><a href="login.php">Login</a></li>
 
                 <li><a href="contact.php">Contact Us</a></li>
-                <li><a href="news.php">news</a></li>
+                <li><a href="churchnews.php">news</a></li>
         </div><!--/.nav-collapse -->
     </div>
 
