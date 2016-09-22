@@ -292,6 +292,29 @@
             }
         }
 
+        public static function getAllEvents($query)
+        {
+            try {
+                $no = 1;
+
+                $result = self::$DB_CONN->query($query);
+
+                foreach ($result as $item) {
+                    echo ' 
+ <tr>
+                    <td>' . $no . '</td>
+			<td>' . $item[EVENT_NAME] . '</td>
+			<td>' . $item[EVENT_START_DATE] . '</td>
+			<td>' . $item[EVENT_END_DATE] . '</td>
+                    </tr>
+                    ';
+                }
+
+            } catch (PDOException $e) {
+                echo "Error " . $e->getMessage();
+            }
+        }
+
         public static function getAllUserData($query) {
             try {
                 $no = 1;

@@ -40,7 +40,12 @@ include_once 'includes/config.php';
 
             </div>
             <div id="navbar" class="navbar-collapse collapse navbar-right">
-                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="index.php">Home</a></li>
+                    <li class="active"><a href="login.php">Login</a></li>
+
+                    <li><a href="contact.php">Contact Us</a></li>
+                </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>

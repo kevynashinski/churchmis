@@ -39,6 +39,10 @@ define("DATE", "date");
 define("TIME", "time");
 define("AMOUNT", "amount");
 
+define('EVENT_NAME', 'event_name');
+define('EVENT_START_DATE', 'start_date');
+define('EVENT_END_DATE', 'end_date');
+
     try {
         $DB_CONN = new PDO("mysql:host=" . HOST . ";dbname=" . DATABASE, USER, PASS);
     } catch (PDOException $e) {
