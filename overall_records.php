@@ -37,10 +37,11 @@ include_once 'includes/config.php';
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
-                <!--                <li class="active"><a href="">Hi -->
-                <?php //echo $_SESSION['username']?><!--</a></li>-->
+                <li class="active"><a href="">Hi
+                        <?php echo $_SESSION['username'] ?></a></li>
                 <li><a href='dashboard.php'>DashBoard</a></li>
                 <li><a href="mpesa.php">Mpesa Transactions</a></li>
+                <li><a href="events.php">Manage Events</a></li>
                 <li><a href="logout.php">Logout</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
             </ul>

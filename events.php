@@ -10,25 +10,22 @@ include_once 'includes/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
-    if (isset($_REQUEST[MPESA_CODE]) && isset($_REQUEST[FULL_NAME]) && isset($_REQUEST[AMOUNT]) && isset($_REQUEST[DATE]) && isset($_REQUEST[TIME])) {
-        $mpesaCode = $_REQUEST[MPESA_CODE];
-        $fullName = $_REQUEST[FULL_NAME];
-        $amount = $_REQUEST[AMOUNT];
-        $date = $_REQUEST[DATE];
-        $time = $_REQUEST[TIME];
+    if (isset($_POST['submit'])) {
+        $event_name = $_REQUEST[EVENT_NAME];
+        $venue = $_REQUEST[VENUE];
+        $start_date = $_REQUEST[EVENT_START_DATE];
+        $end_date = $_REQUEST[EVENT_END_DATE];
 
-        if (db_operations::saveMpesaTransaction($mpesaCode, $fullName, $amount, $date, $time)) {
-            echo 0;
-        } else {
-            echo 1;
+        if (db_operations::addEvent($event_name, $venue, $start_date, $end_date)) {
+            echo "Event Added Successfully!";
         }
+
     } else {
         echo 'Missing Post Param';
     }
 
-} else {
-//    echo 'Post only';
 }
+
 ?>
 
 <html lang="en-US">
@@ -58,9 +55,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
+                <!--                <li class="active"><a href="">Hi-->
+                <!--                        --><?php //echo $_SESSION['username']?><!--</a></li>-->
                 <li><a href='dashboard.php'>DashBoard</a></li>
-                <li><a href="contact.php">Contact Us</a></li>
+                <li><a href="mpesa.php">Mpesa Transactions</a></li>
+                <li><a href="events.php">Manage Events</a></li>
                 <li><a href="logout.php">Logout</a></li>
+                <li><a href="contact.php">Contact Us</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -81,6 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                 <tr>
                     <th>#</th>
                     <th>EVENT NAME</th>
+                    <th>VENUE</th>
                     <th>EVENT START DATE</th>
                     <th>EVENT END DATE</th>
                 </tr>
@@ -108,6 +110,54 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             </table>
         </div>
     </div>
+
+    <?php
+    session_start();
+    if (isset($_SESSION[USERNAME])) {
+        echo
+
+        '    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <h5 style="text-align:center; font-size:4em;">Add an Events</h5>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="signup">
+                    <form role="form" method="post">
+
+                        <div class="form-group">
+                            <input id="full_name" type="text" placeholder="Enter Event Name" name="event_name"
+                                   class="form-control" list="fullNameList" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input id="phoneNumber" type="text" placeholder="Enter Venue" name="venue"
+                                   class="form-control" required>
+                        </div>
+                          
+                          <div class="form-group">
+                            <input id="date" type="date" placeholder="Select Start Date" name="start_date"
+                                   class="form-control" required>
+                        </div>
+                        
+                          <div class="form-group">
+                            <input id="date" type="date" placeholder="Select End Date" name="end_date"
+                                   class="form-control" required>
+                        </div>
+
+                        <br>
+
+                        <button type="submit" name="submit" class="btn btn-success btn-lg">
+                            <span class="glyphicon-plus"></span>
+                            Save Event</button>
+                    </form>
+</div>
+</div>
+    ';
+    }
+
+    ?>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
     <script src="js/jquery-2.2.0.min.js"></script>

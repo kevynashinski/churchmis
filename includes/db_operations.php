@@ -111,6 +111,28 @@
             return false;
         }
 
+
+        public static function addEvent($event_name, $venue, $start_date, $end_date)
+        {
+            try {
+                $sql_profile = "INSERT INTO events(event_name, start_date, end_date, venue) VALUES (?,?,?,?)";
+
+                $stmt = self::$DB_CONN->prepare($sql_profile);
+                $stmt->bindParam(1, $event_name);
+                $stmt->bindParam(2, $start_date);
+                $stmt->bindParam(3, $end_date);
+                $stmt->bindParam(4, $venue);
+
+                if ($stmt->execute()) {
+                    return true;
+                }
+
+            } catch (PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+            return false;
+        }
+
         public static function saveMpesaTransaction($mpesaCode, $fullName, $amount, $date, $time)
         {
             try {
@@ -270,7 +292,6 @@
         {
             try {
                 $no = 1;
-                $amount = 0;
 
                 $result = self::$DB_CONN->query($query);
 
@@ -304,6 +325,7 @@
  <tr>
                     <td>' . $no . '</td>
 			<td>' . $item[EVENT_NAME] . '</td>
+			<td>' . $item[VENUE] . '</td>
 			<td>' . $item[EVENT_START_DATE] . '</td>
 			<td>' . $item[EVENT_END_DATE] . '</td>
                     </tr>

@@ -62,6 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                 <li class="active"><a href="">Hi <?php echo $_SESSION[USERNAME] ?></a></li>
                 <li><a href='dashboard.php'>DashBoard</a></li>
                 <li><a href="overall_records.php">Records</a></li>
+                <li><a href="events.php">Manage Events</a></li>
                 <li><a href="logout.php">Logout</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
             </ul>

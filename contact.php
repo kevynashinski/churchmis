@@ -41,7 +41,12 @@ include_once 'includes/config.php';
             <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
-            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav">
+                <li><a href='index.php'>Home</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="login.php">News</a></li>
+                <li><a href="login.php">Events</a></li>
+            </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
