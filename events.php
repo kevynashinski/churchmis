@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     } else {
         echo 'Missing Post Param';
     }
-
 }
 
 ?>
@@ -36,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     <title>ChurchMis</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="shortcut icon" href="images/favicon.png">
+    <!--    <link rel="shortcut icon" href="images/favicon.png">-->
 
 </head>
 <body class="bgmain">
@@ -51,16 +50,29 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>
+            <!--            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>-->
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
                 <!--                <li class="active"><a href="">Hi-->
                 <!--                        --><?php //echo $_SESSION['username']?><!--</a></li>-->
-                <li><a href='dashboard.php'>DashBoard</a></li>
-                <li><a href="mpesa.php">Mpesa Transactions</a></li>
-                <li><a href="events.php">Manage Events</a></li>
-                <li><a href="logout.php">Logout</a></li>
+
+                <?php
+                session_start();
+                if (isset($_SESSION[USERNAME])) {
+                    echo
+                    '<li><a href="dashboard.php">DashBoard</a></li>
+<li><a href="mpesa.php">Mpesa Transactions</a></li>
+                                <li><a href="logout.php">Logout</a></li>
+';
+                } else {
+                    echo '
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="news.php">News</a></li>';
+                }
+                ?>
+
+                <li class="active"><a href="events.php">Events</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -112,10 +124,9 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     </div>
 
     <?php
-    session_start();
+    //    session_start();
     if (isset($_SESSION[USERNAME])) {
         echo
-
         '    <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
             <h5 style="text-align:center; font-size:4em;">Add an Events</h5>

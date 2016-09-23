@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 09, 2016 at 12:50 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Sep 23, 2016 at 07:14 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `report`
@@ -23,56 +23,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auth`
---
-
-CREATE TABLE IF NOT EXISTS `auth` (
-  `id_number` int(11) NOT NULL,
-  `surname` varchar(20) NOT NULL,
-  `other_name` varchar(30) NOT NULL,
-  `phone_number` int(11) NOT NULL,
-  `gender` varchar(7) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `registered_date` date NOT NULL,
-  `role` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id_number`),
-  UNIQUE KEY `username_uni` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `auth`
---
-
-INSERT INTO users (`id_number`, `surname`, `other_name`, `phone_number`, `gender`, `username`, `password`, `registered_date`, `role`)
-VALUES
-(12345, 'wamalwa', 'ian wafula', 708811733, 'Male', 'ianwafula@gmail.com', '$2y$10$z19x3tZmLPVleJAmQjdG7e6BThH0ttHCyanWxlksf7RL/5kTeJwlu', '2016-02-21', 'clerk'),
-(23583687, 'Salah', 'George', 724345641, 'Male', 'sallageo@gmail.com', '$2y$10$DI.uQ8udAzlqFFF5jhDJjun1WdW2VW9gueJUng49t4lFs0v5bjoDa', '2016-02-21', 'superuser'),
-(29483944, 'oyugi', 'zephaniah onyago', 732438794, 'Male', 'zephp3@gmail.com', '$2y$10$RdfwnYSXz9w.m/hq8ch5t.yb1tbEUlT2HzQnFjuIL/iBKlpdenfa2', '2016-02-21', 'clerk'),
-  (30776967, 'wekhanya', 'kevin wafula', 729243690, 'Male', 'kevinwafula60@gmail.com',
-   '$2y$10$pdfB7zd.KbQNmjXhK2dFx.LBW.nZfzEr230MOWOActIZ47KV5GEYm', '2016-02-20', 'superuser'),
-  (34556667, 'fred', 'nunun', 76543221, 'Male', 'fredwamae34@gmail.com',
-   '$2y$10$aCgNuPmhDSzBDL22sf98me1Ck4vAlz4Zk/15CqeZfyCkHXRM2mJa6', '2016-08-31', 'clerk'),
-  (324252566, 'mwangi', 'fred', 756556666, 'Male', 'fredrickmuriuki97@yahoo.com',
-   '$2y$10$2k0g35pK61AXcdZBEO6sxOz7zEf9QKP5TR8.1qR/xYtd3SRx4IW3q', '2016-08-31', NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `details`
 --
 
-CREATE TABLE IF NOT EXISTS `details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(30) NOT NULL,
-  `phone_number` int(11) NOT NULL,
-  `gender` varchar(7) NOT NULL,
-  `registrar` varchar(30) NOT NULL DEFAULT 'admin@admin.com',
-  PRIMARY KEY (`id`)
+CREATE TABLE `details` (
+  `id`           INT(11)     NOT NULL,
+  `full_name`    varchar(30) NOT NULL,
+  `phone_number` int(11)     NOT NULL,
+  `gender`       varchar(7)  NOT NULL,
+  `registrar`    VARCHAR(30) NOT NULL DEFAULT 'admin@admin.com'
 )
   ENGINE = InnoDB
-  DEFAULT CHARSET = latin1
-  AUTO_INCREMENT = 12;
+  DEFAULT CHARSET = latin1;
 
 --
 -- Dumping data for table `details`
@@ -97,38 +59,119 @@ INSERT INTO `details` (`id`, `full_name`, `phone_number`, `gender`, `registrar`)
 -- Table structure for table `events`
 --
 
-CREATE TABLE IF NOT EXISTS `events` (
-  `fundraising`    VARCHAR(35) NOT NULL,
-  `trips`          VARCHAR(35) NOT NULL,
-  `church service` VARCHAR(35) NOT NULL,
-  `group meeting`  VARCHAR(35) NOT NULL,
-  UNIQUE KEY `fundraising` (`fundraising`, `trips`, `church service`, `group meeting`)
+CREATE TABLE `events` (
+  `event_id`   INT(11)      NOT NULL,
+  `event_name` VARCHAR(50)  NOT NULL,
+  `start_date` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `end_date`   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `venue`      VARCHAR(100) NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`event_id`, `event_name`, `start_date`, `end_date`, `created_at`, `venue`) VALUES
+  (1, 'fundraising', '2016-09-22 16:38:07', '2016-10-17 21:00:00', '2016-09-21 10:50:12', 'Chipolopolo'),
+  (2, 'wedding for mr and mrs so and so', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2016-09-22 17:05:59',
+   'nairobi chapel');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `men`
+-- Table structure for table `groups`
 --
 
-CREATE TABLE IF NOT EXISTS `men` (
-  `id`      INT(10)     NOT NULL,
-  `name`    VARCHAR(30) NOT NULL,
-  `contact` INT(10)     NOT NULL,
-  `email`   VARCHAR(32) NOT NULL
+CREATE TABLE `groups` (
+  `group_id`   INT(11)     NOT NULL,
+  `group_name` VARCHAR(50) NOT NULL,
+  `created_at` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
 --
--- Dumping data for table `men`
+-- Dumping data for table `groups`
 --
 
-INSERT INTO `men` (`id`, `name`, `contact`, `email`) VALUES
-  (9827345, 'fafa fofo', 2147483647, 'fafan@gmail.com'),
-  (41244, 'ann atieno', 75231655, 'ann3@gmail.com');
+INSERT INTO `groups` (`group_id`, `group_name`, `created_at`) VALUES
+  (1, 'Women Group', '0000-00-00 00:00:00'),
+  (2, 'Men Group', '0000-00-00 00:00:00'),
+  (5, 'Youth Group', '2016-09-21 13:49:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `members`
+--
+
+CREATE TABLE `members` (
+  `member_id`    INT(11)     NOT NULL,
+  `fullname`     VARCHAR(50) NOT NULL,
+  `email`        VARCHAR(50) NOT NULL,
+  `phone_number` INT(11)     NOT NULL,
+  `gender`       VARCHAR(10) NOT NULL,
+  `group_id`     INT(11)     NOT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`member_id`, `fullname`, `email`, `phone_number`, `gender`, `group_id`) VALUES
+  (2, 'kevin wafula', 'kevinwafula60@gmail.com', 729243690, 'male', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mpesa`
+--
+
+CREATE TABLE `mpesa` (
+  `mpesa_id`   INT(11)     NOT NULL,
+  `mpesa_code` VARCHAR(15) NOT NULL,
+  `full_name`  VARCHAR(50) NOT NULL,
+  `date`       DATE        NOT NULL,
+  `time`       TIME        NOT NULL,
+  `created_at` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `amount`     VARCHAR(10)          DEFAULT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
+--
+-- Dumping data for table `mpesa`
+--
+
+INSERT INTO `mpesa` (`mpesa_id`, `mpesa_code`, `full_name`, `date`, `time`, `created_at`, `amount`) VALUES
+  (1, 'ME34K53N2', 'KEVIN WAFULA', '2016-09-16', '08:24:00', '2016-09-20 05:22:07', '530'),
+  (5, 'KE34MN36T', 'Lenic Njagi', '2016-09-15', '07:18:00', '2016-09-20 05:27:28', '405');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `news_id`      INT(11)   NOT NULL,
+  `news_details` TEXT,
+  `created_at`   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`news_id`, `news_details`, `created_at`) VALUES
+  (1, 'There will be an annual thanks giving at the church on 16th Sep, 2016. All are welcome', '2016-09-20 07:30:36');
 
 -- --------------------------------------------------------
 
@@ -136,15 +179,14 @@ INSERT INTO `men` (`id`, `name`, `contact`, `email`) VALUES
 -- Table structure for table `payments`
 --
 
-CREATE TABLE IF NOT EXISTS `payments` (
-  `id` int(11) NOT NULL,
-  `purpose` varchar(25) NOT NULL,
-  `cash` int(11) NOT NULL DEFAULT '0',
-  `cheque` int(11) NOT NULL DEFAULT '0',
-  `forex` int(11) NOT NULL DEFAULT '0',
-  `receipt_status` tinyint(1) NOT NULL DEFAULT '0',
-  `payment_date` date NOT NULL,
-  KEY `payments_details_id_fk` (`id`)
+CREATE TABLE `payments` (
+  `id`             int(11)     NOT NULL,
+  `purpose`        varchar(25) NOT NULL,
+  `cash`           int(11)     NOT NULL DEFAULT '0',
+  `cheque`         int(11)     NOT NULL DEFAULT '0',
+  `forex`          int(11)     NOT NULL DEFAULT '0',
+  `receipt_status` tinyint(1)  NOT NULL DEFAULT '0',
+  `payment_date`   DATE        NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -174,10 +216,9 @@ INSERT INTO `payments` (`id`, `purpose`, `cash`, `cheque`, `forex`, `receipt_sta
 -- Table structure for table `priviledges`
 --
 
-CREATE TABLE IF NOT EXISTS `priviledges` (
+CREATE TABLE `priviledges` (
   `username` varchar(30) NOT NULL,
-  `roles` varchar(20) NOT NULL,
-  KEY `fk_user_priviledges` (`username`)
+  `roles`    VARCHAR(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -186,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `priviledges` (
 -- Table structure for table `purposes`
 --
 
-CREATE TABLE IF NOT EXISTS `purposes` (
+CREATE TABLE `purposes` (
   `purpose` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -206,77 +247,199 @@ INSERT INTO `purposes` (`purpose`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `women`
+-- Table structure for table `roles`
 --
 
-CREATE TABLE IF NOT EXISTS `women` (
-  `id`      INT(10)     NOT NULL,
-  `name`    VARCHAR(30) NOT NULL,
-  `contact` INT(10)     NOT NULL,
-  `email`   VARCHAR(32) NOT NULL
+CREATE TABLE `roles` (
+  `role_id`    INT(11)     NOT NULL,
+  `role`       VARCHAR(20) NOT NULL,
+  `added_by`   VARCHAR(50) NOT NULL,
+  `created_at` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
-
---
--- Dumping data for table `women`
---
-
-INSERT INTO `women` (`id`, `name`, `contact`, `email`) VALUES
-  (762354, '0', 0, '0'),
-  (762354, 'meza meza', 0, ''),
-  (762354, 'meza meza', 0, ''),
-  (762354, 'meza meza', 0, ''),
-  (67246324, 'toto toto', 73273, ''),
-  (67246324, 'toto toto', 73273, ''),
-  (67246324, 'moto toto', 631651, ''),
-  (345464, 'dada dada', 78776569, ''),
-  (345464, 'dada dada', 78776569, ''),
-  (345464, 'dada dada', 78776569, ''),
-  (345464, 'dada dada', 78776569, ''),
-  (785687, 'nana kanana', 75645456, 'kanana@gmail,com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `youth`
+-- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `youth` (
-  `id`      INT(10)     NOT NULL,
-  `name`    VARCHAR(30) NOT NULL,
-  `contact` INT(11)     NOT NULL,
-  `email`   VARCHAR(30) NOT NULL
+CREATE TABLE `users` (
+  `id_number`       INT(11)      NOT NULL,
+  `surname`         VARCHAR(20)  NOT NULL,
+  `other_name`      VARCHAR(30)  NOT NULL,
+  `phone_number`    INT(11)      NOT NULL,
+  `gender`          VARCHAR(7)   NOT NULL,
+  `username`        VARCHAR(50)  NOT NULL,
+  `password`        VARCHAR(255) NOT NULL,
+  `registered_date` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `role`            VARCHAR(10)           DEFAULT NULL,
+  `photo`           VARCHAR(100)          DEFAULT NULL,
+  `phototype`       VARCHAR(10)           DEFAULT NULL,
+  `city`            VARCHAR(50)           DEFAULT 'Nairobi'
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
 --
--- Dumping data for table `youth`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `youth` (`id`, `name`, `contact`, `email`) VALUES
-  (12, 'safgvdsg', 0, ''),
-  (12, 'safgvdsg', 0, ''),
-  (12, 'safgvdsg', 0, ''),
-  (12, 'safgvdsg', 0, ''),
-  (23344, 'fdfbxfhfxn', 0, ''),
-  (535636, 'sfdhgvsanmvc', 0, ''),
-  (535636, 'sfdhgvsanmvc', 0, ''),
-  (535636, 'sfdhgvsanmvc', 0, ''),
-  (424255632, 'fgdghzxxgj', 0, ''),
-  (67164126, 'gogo bobo', 0, ''),
-  (67164126, 'gogo bobo', 0, ''),
-  (765678, 'dudu dada', 99887676, 'dudu@gmail.com'),
-  (0, 'vava  dada', 0, ''),
-  (0, 'vava  dada', 0, ''),
-  (0, 'vava  dada', 0, ''),
-  (0, 'vava  dada', 0, ''),
-  (787999, 'kevin muya', 2147483647, 'muya@gmail.com');
+INSERT INTO `users` (`id_number`, `surname`, `other_name`, `phone_number`, `gender`, `username`, `password`, `registered_date`, `role`, `photo`, `phototype`, `city`)
+VALUES
+  (250, 'user', 'new user', 789565521, 'Female', 'newuser@gmail.com',
+        '$2y$10$SbrCYt0gR.3efh28OZ9dwuMSfVV2JBKBLt1ajVRM1R0wyTjPzPLha', '2016-09-12 21:00:00', 'clerk', NULL, NULL,
+   'Nairobi'),
+  (10000, 'hello', 'hawayu', 48651320, 'Female', 'hello@gmail.com',
+          '$2y$10$fCQVt1caW3Z6YusOCWR6AOWc3ggE.W69EbQ/TnV2aE0OKH/zpxcBO', '2016-09-22 16:05:37', NULL, NULL, NULL,
+   'Nairobi'),
+  (12345, 'wamalwa', 'ian wafula', 708811733, 'Male', 'ianwafula@gmail.com',
+          '$2y$10$z19x3tZmLPVleJAmQjdG7e6BThH0ttHCyanWxlksf7RL/5kTeJwlu', '2016-02-20 21:00:00', 'clerk', NULL, NULL,
+   'Nairobi'),
+  (64531, 'alksdjflkj', 'ajsdflkjasd', 1532, 'Female', 'kevinwa@gmail.com',
+          '$2y$10$u65.qHbOVYHlcwsVLOItH.QLyiFnjTK2J8HsocmE4HMPUxhwh8sTe', '2016-09-22 16:03:32', NULL, NULL, NULL,
+   'Nairobi'),
+  (845612, 'kevin', 'wafula wekhanya', 51320, 'Male', 'kevinwafula60@gmail.com',
+           '$2y$10$5uCQvRsw/Rz2vOo69qd/seqLbK77EmS3Q2bgi0t5SvjvWeDagAynm', '2016-09-22 16:24:22', 'admin', NULL, NULL,
+   'Nairobi'),
+  (23583687, 'Salah', 'George', 724345641, 'Male', 'sallageo@gmail.com',
+             '$2y$10$DI.uQ8udAzlqFFF5jhDJjun1WdW2VW9gueJUng49t4lFs0v5bjoDa', '2016-02-20 21:00:00', 'supervisor', NULL,
+             NULL, 'Nairobi'),
+  (29483944, 'oyugi', 'zephaniah onyago', 732438794, 'Male', 'zephp3@gmail.com',
+             '$2y$10$RdfwnYSXz9w.m/hq8ch5t.yb1tbEUlT2HzQnFjuIL/iBKlpdenfa2', '2016-02-20 21:00:00', 'clerk', NULL, NULL,
+   'Nairobi'),
+  (34556667, 'fred', 'nunun', 76543221, 'Male', 'fredwamae34@gmail.com',
+             '$2y$10$aCgNuPmhDSzBDL22sf98me1Ck4vAlz4Zk/15CqeZfyCkHXRM2mJa6', '2016-08-30 21:00:00', 'clerk', NULL, NULL,
+   'Nairobi'),
+  (86451320, 'Akelo', 'Richard Onyango', 727709772, 'Male', 'akellorichard@gmail.com',
+             '$2y$10$DpH9p2.WsX1kTSdCvpMzFO7mogpu.yJpnG/mBLCFo9RlP0rC6aRMy', '2016-09-22 17:02:20', 'supervisor', NULL,
+             NULL, 'Nairobi'),
+  (324252566, 'mwangi', 'fred', 756556666, 'Male', 'fredrickmuriuki97@yahoo.com',
+              '$2y$10$2k0g35pK61AXcdZBEO6sxOz7zEf9QKP5TR8.1qR/xYtd3SRx4IW3q', '2016-08-30 21:00:00', NULL, NULL, NULL,
+   'Nairobi');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `details`
+--
+ALTER TABLE `details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`event_id`);
+
+--
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`group_id`);
+
+--
+-- Indexes for table `members`
+--
+ALTER TABLE `members`
+  ADD PRIMARY KEY (`member_id`),
+  ADD KEY `members_groups_group_id_fk` (`group_id`);
+
+--
+-- Indexes for table `mpesa`
+--
+ALTER TABLE `mpesa`
+  ADD PRIMARY KEY (`mpesa_id`);
+
+--
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`news_id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD KEY `payments_details_id_fk` (`id`);
+
+--
+-- Indexes for table `priviledges`
+--
+ALTER TABLE `priviledges`
+  ADD KEY `fk_user_priviledges` (`username`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`role_id`),
+  ADD UNIQUE KEY `role` (`role`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_number`),
+  ADD UNIQUE KEY `username_uni` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `details`
+--
+ALTER TABLE `details`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 12;
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `event_id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 3;
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `group_id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 6;
+--
+-- AUTO_INCREMENT for table `members`
+--
+ALTER TABLE `members`
+  MODIFY `member_id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 3;
+--
+-- AUTO_INCREMENT for table `mpesa`
+--
+ALTER TABLE `mpesa`
+  MODIFY `mpesa_id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 6;
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `news_id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 2;
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `role_id` INT(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `members`
+--
+ALTER TABLE `members`
+  ADD CONSTRAINT `members_groups_group_id_fk` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`);
 
 --
 -- Constraints for table `payments`
@@ -288,7 +451,7 @@ ALTER TABLE `payments`
 -- Constraints for table `priviledges`
 --
 ALTER TABLE `priviledges`
-  ADD CONSTRAINT `fk_user_priviledges` FOREIGN KEY (`username`) REFERENCES users (`username`);
+  ADD CONSTRAINT `fk_user_priviledges` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

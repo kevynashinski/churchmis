@@ -112,6 +112,23 @@
         }
 
 
+        public static function updatePassword($username, $password)
+        {
+            try {
+                $newPassword = password_hash($password, PASSWORD_DEFAULT);
+
+                $sql_profile = "UPDATE users SET password ='$newPassword' WHERE username = '$username'";
+
+                $stmt = self::$DB_CONN->prepare($sql_profile);
+                if ($stmt->execute()) {
+                    return true;
+                }
+            } catch (PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+            return false;
+        }
+
         public static function addEvent($event_name, $venue, $start_date, $end_date)
         {
             try {
@@ -177,12 +194,31 @@
 
                 $stmt = self::$DB_CONN->prepare($query);
                 $stmt->bindParam(1, $username);
-                $result = $stmt->execute();
 
-                $row = $stmt->fetch();
+                if ($stmt->execute()) {
+                    return $stmt->fetch();
+                }
+            } catch (PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+            return null;
+        }
 
-                if ($result) {
-                    return $row;
+        public static function verifyPassword($username, $password)
+        {
+            $stmt = null;
+            try {
+                $query = "SELECT * FROM users WHERE username=? LIMIT 1";
+
+                $stmt = self::$DB_CONN->prepare($query);
+                $stmt->bindParam(1, $username);
+
+                if ($stmt->execute()) {
+                    $row = $stmt->fetch();
+                    if (password_verify($password, $row[PASSWORD])) {
+                        // CREATE session
+                        return true;
+                    }
                 }
             }catch(PDOException $e){
                 echo 'Error: '.$e->getMessage();

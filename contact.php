@@ -17,7 +17,7 @@ include_once 'includes/config.php';
     <title>ChurchMIS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="shortcut icon" href="images/favicon.png">
+    <!--    <link rel="shortcut icon" href="images/favicon.png">-->
 
     <script type="application/javascript">
 
@@ -38,7 +38,7 @@ include_once 'includes/config.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>
+            <!--            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>-->
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
@@ -46,6 +46,7 @@ include_once 'includes/config.php';
                 <li><a href="login.php">Login</a></li>
                 <li><a href="login.php">News</a></li>
                 <li><a href="login.php">Events</a></li>
+                <li class="active"><a href="contact.php">Contact Us</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

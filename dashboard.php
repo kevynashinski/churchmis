@@ -59,7 +59,7 @@ include_once 'includes/db_operations.php';
     <title>MyGalaxy | Social for all</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="shortcut icon" href="images/favicon.png">
+    <!--    <link rel="shortcut icon" href="images/favicon.png">-->
 </head>
 <body class="bgmain">
 
@@ -73,13 +73,12 @@ include_once 'includes/db_operations.php';
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>
+            <!--            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>-->
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li><a href="dashboard.php"><span class="glyphicon glyphicon-user"></span>
+                <li class="active"><a href="dashboard.php"><span class="glyphicon glyphicon-user"></span>
                         Welcome, <?php echo $surname . '&nbsp;' . $otherName; ?></a></li>
-                <li class="active"><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="profile.php">My Profile</a></li>
                 <li><a href="logout.php">Let me out</a></li>
                 <li><a href="changepassword.php">Settings <span class="glyphicon glyphicon-cog"></span></a></li>

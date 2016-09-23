@@ -6,7 +6,7 @@
      * Time: 3:29 PM
      */
     include_once 'includes/config.php';
-    //include_once 'includes/header.php';
+include_once 'includes/session.php';
 ?>
 
 <html lang="en-US">
@@ -14,10 +14,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="classwork, follwoing, chatting, liking">
-    <title>MyGalaxy | Social for all</title>
+    <title>ChurchMIS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="shortcut icon" href="images/favicon.png">
+    <!--    <link rel="shortcut icon" href="images/favicon.png">-->
 
 
 </head>
@@ -33,13 +33,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>
+            <!--            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>-->
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
-                <!--                <li class="active"><a href="">Hi -->
-                <?php //echo $_SESSION['username']?><!--</a></li>-->
-                <li><a href='dashboard.php'>DashBoard</a></li>
+                <li><a href="dashboard.php">Hi, <?php echo $_SESSION['username'] ?></a></li>
                 <li><a href="logout.php">Logout</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
             </ul>
@@ -51,19 +49,10 @@
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
             <h1 style="text-align:center; font-size:4em;">Welcome to MyGalaxy</h1>
-            <h2 style="text-align:center;">Are you feeling bored? want to have some fun with your friends online?<br>
-                then definately you are in the right place</h2>
-            <h3 style="text-align:center">Enter Record</h3>
+            <h3 style="text-align:center">Users</h3>
         </div>
     </div>
 
-</div>
-
-<div class="container">
-    <div class="input-group">
-        <span class="input-group-addon">Search</span>
-        <input id="filter" type="text" class="search" placeholder="Type the name here...">
-    </div>
 </div>
 
 <br>
@@ -116,21 +105,3 @@
 <script src="js/bootstrap.js"></script>
 </body>
 </html>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        (function ($) {
-
-            $('#filter').keyup(function () {
-
-                var rex = new RegExp($(this).val(), 'i');
-                $('.searchable tr').hide();
-                $('.searchable tr').filter(function () {
-                    return rex.test($(this).text());
-                }).show();
-            })
-
-        }(jQuery));
-
-    });
-</script>

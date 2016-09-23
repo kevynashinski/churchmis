@@ -48,7 +48,7 @@ if (isset($_REQUEST['submit'])) {
     <title>ChurchMIS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="shortcut icon" href="images/favicon.png">
+    <!--    <link rel="shortcut icon" href="images/favicon.png">-->
 </head>
 <body class="bgmain">
 
@@ -62,13 +62,16 @@ if (isset($_REQUEST['submit'])) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>
+            <!--            <a class="navbar-right" href="index.php"><img src="images/logo.png" alt="Logo"></a>-->
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
                 <!--                <li class="active"><a href="">Hi -->
                 <?php //echo $_SESSION['username'] ?><!--</a></li>-->
                 <li><a href="index.php">Home</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li class="active"><a href="signup.php">Sign Up</a></li>
+                <li><a href="events.php">Events</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
             </ul>
         </div><!--/.nav-collapse -->

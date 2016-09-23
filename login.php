@@ -15,9 +15,11 @@
             if($_SESSION[ROLE]=='clerk') {
                 //check the priviledges then redirect the user accordingly
                 db_operations::redirect('add_records.php');
-            }elseif($_SESSION[ROLE]=='superuser'){
+            } elseif ($_SESSION[ROLE] == 'supervisor') {
                 db_operations::redirect('overall_records.php');
             }elseif($_SESSION[ROLE]=='admin'){
+                db_operations::redirect('admin.php');
+            } elseif ($_SESSION[ROLE] == 'member') {
 //                db_operations::redirect('');
             }else{
                 $error = "<div class='alert btn-danger'>Access Denied!</div>";
@@ -58,7 +60,7 @@
                 <li class="active"><a href="login.php">Login</a></li>
 
                 <li><a href="contact.php">Contact Us</a></li>
-                <li><a href="churchnews.php">News</a></li>
+                <li><a href="news.php">News</a></li>
                 <li><a href="events.php">Events</a></li>
         </div><!--/.nav-collapse -->
     </div>
@@ -69,7 +71,7 @@
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
             <h1 style="text-align:center; font-size:4em;">Welcome to churchMIS</h1>
-            <h3 style="text-align:center">Please Login Below for new member registration</h3>
+            <h3 style="text-align:center">Login</h3>
         </div>
     </div>
 
