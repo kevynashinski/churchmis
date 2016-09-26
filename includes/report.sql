@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 23, 2016 at 07:14 PM
+-- Generation Time: Sep 26, 2016 at 09:34 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -28,10 +28,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `details` (
   `id`           INT(11)     NOT NULL,
-  `full_name`    varchar(30) NOT NULL,
-  `phone_number` int(11)     NOT NULL,
-  `gender`       varchar(7)  NOT NULL,
-  `registrar`    VARCHAR(30) NOT NULL DEFAULT 'admin@admin.com'
+  `full_name`    VARCHAR(30) NOT NULL,
+  `phone_number` INT(11)     NOT NULL,
+  `gender`       VARCHAR(7)  NOT NULL,
+  `registrar`    VARCHAR(50) NOT NULL DEFAULT 'kevinwafula60@gmail.com'
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -41,17 +41,17 @@ CREATE TABLE `details` (
 --
 
 INSERT INTO `details` (`id`, `full_name`, `phone_number`, `gender`, `registrar`) VALUES
-(1, 'admin admin', 729243690, 'female', 'admin@admin.com'),
-(2, 'kevin wafula', 729243690, 'male', 'admin@admin.com'),
-(3, 'bryan musau', 76543513, 'Male', 'admin@admin.com'),
-(4, 'ryle neville', 707088125, 'Male', 'admin@admin.com'),
-(5, 'dennis marley', 684651351, 'Male', 'admin@admin.com'),
-(6, 'k', 5, 'Male', 'admin@admin.com'),
-(7, 'abdul abdi', 84653132, 'Male', 'admin@admin.com'),
-(8, 'evancia kandie', 47554, 'Female', 'admin@admin.com'),
-(9, 'ian wafula', 708811733, 'Male', 'admin@admin.com'),
-  (10, 'griffins adelmo', 726469456, 'Male', 'admin@admin.com'),
-  (11, 'fred muriuki', 719348776, 'Male', 'admin@admin.com');
+  (1, 'admin admin', 729243690, 'female', 'kevinwafula60@gmail.com'),
+  (2, 'kevin wafula', 729243690, 'male', 'kevinwafula60@gmail.com'),
+  (3, 'bryan musau', 76543513, 'Male', 'kevinwafula60@gmail.com'),
+  (4, 'ryle neville', 707088125, 'Male', 'kevinwafula60@gmail.com'),
+  (5, 'dennis marley', 684651351, 'Male', 'kevinwafula60@gmail.com'),
+  (6, 'k', 5, 'Male', 'kevinwafula60@gmail.com'),
+  (7, 'abdul abdi', 84653132, 'Male', 'kevinwafula60@gmail.com'),
+  (8, 'evancia kandie', 47554, 'Female', 'kevinwafula60@gmail.com'),
+  (9, 'ian wafula', 708811733, 'Male', 'kevinwafula60@gmail.com'),
+  (10, 'griffins adelmo', 726469456, 'Male', 'kevinwafula60@gmail.com'),
+  (11, 'fred muriuki', 719348776, 'Male', 'kevinwafula60@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -65,7 +65,8 @@ CREATE TABLE `events` (
   `start_date` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `end_date`   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `venue`      VARCHAR(100) NOT NULL
+  `venue`      VARCHAR(100) NOT NULL,
+  `username`   VARCHAR(50)           DEFAULT 'kevinwafula60@gmail.com'
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -74,10 +75,10 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`event_id`, `event_name`, `start_date`, `end_date`, `created_at`, `venue`) VALUES
-  (1, 'fundraising', '2016-09-22 16:38:07', '2016-10-17 21:00:00', '2016-09-21 10:50:12', 'Chipolopolo'),
+INSERT INTO `events` (`event_id`, `event_name`, `start_date`, `end_date`, `created_at`, `venue`, `username`) VALUES
+  (1, 'fundraising', '2016-09-22 16:38:07', '2016-10-17 21:00:00', '2016-09-21 10:50:12', 'Chipolopolo', NULL),
   (2, 'wedding for mr and mrs so and so', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2016-09-22 17:05:59',
-   'nairobi chapel');
+   'nairobi chapel', NULL);
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,8 @@ INSERT INTO `events` (`event_id`, `event_name`, `start_date`, `end_date`, `creat
 CREATE TABLE `groups` (
   `group_id`   INT(11)     NOT NULL,
   `group_name` VARCHAR(50) NOT NULL,
-  `created_at` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `username`   VARCHAR(50)          DEFAULT 'kevinwafula60@gmail.com'
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -97,10 +99,10 @@ CREATE TABLE `groups` (
 -- Dumping data for table `groups`
 --
 
-INSERT INTO `groups` (`group_id`, `group_name`, `created_at`) VALUES
-  (1, 'Women Group', '0000-00-00 00:00:00'),
-  (2, 'Men Group', '0000-00-00 00:00:00'),
-  (5, 'Youth Group', '2016-09-21 13:49:51');
+INSERT INTO `groups` (`group_id`, `group_name`, `created_at`, `username`) VALUES
+  (1, 'Women Group', '0000-00-00 00:00:00', 'kevinwafula60@gmail.com'),
+  (2, 'Men Group', '0000-00-00 00:00:00', 'kevinwafula60@gmail.com'),
+  (5, 'Youth Group', '2016-09-21 13:49:51', 'kevinwafula60@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -114,7 +116,8 @@ CREATE TABLE `members` (
   `email`        VARCHAR(50) NOT NULL,
   `phone_number` INT(11)     NOT NULL,
   `gender`       VARCHAR(10) NOT NULL,
-  `group_id`     INT(11)     NOT NULL
+  `group_id`     INT(11)     NOT NULL,
+  `username`     VARCHAR(50) DEFAULT 'kevinwafula60@gmail.com'
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -123,8 +126,8 @@ CREATE TABLE `members` (
 -- Dumping data for table `members`
 --
 
-INSERT INTO `members` (`member_id`, `fullname`, `email`, `phone_number`, `gender`, `group_id`) VALUES
-  (2, 'kevin wafula', 'kevinwafula60@gmail.com', 729243690, 'male', 1);
+INSERT INTO `members` (`member_id`, `fullname`, `email`, `phone_number`, `gender`, `group_id`, `username`) VALUES
+  (2, 'kevin wafula', 'kevinwafula60@gmail.com', 729243690, 'male', 1, 'kevinwafula60@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -133,13 +136,14 @@ INSERT INTO `members` (`member_id`, `fullname`, `email`, `phone_number`, `gender
 --
 
 CREATE TABLE `mpesa` (
-  `mpesa_id`   INT(11)     NOT NULL,
-  `mpesa_code` VARCHAR(15) NOT NULL,
-  `full_name`  VARCHAR(50) NOT NULL,
-  `date`       DATE        NOT NULL,
-  `time`       TIME        NOT NULL,
-  `created_at` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `amount`     VARCHAR(10)          DEFAULT NULL
+  `mpesa_id`     INT(11)     NOT NULL,
+  `mpesa_code`   VARCHAR(15) NOT NULL,
+  `full_name`    VARCHAR(50) NOT NULL,
+  `date`         DATE        NOT NULL,
+  `time`         TIME        NOT NULL,
+  `created_at`   TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `amount`       VARCHAR(10)          DEFAULT NULL,
+  `phone_number` VARCHAR(15)          DEFAULT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -148,9 +152,10 @@ CREATE TABLE `mpesa` (
 -- Dumping data for table `mpesa`
 --
 
-INSERT INTO `mpesa` (`mpesa_id`, `mpesa_code`, `full_name`, `date`, `time`, `created_at`, `amount`) VALUES
-  (1, 'ME34K53N2', 'KEVIN WAFULA', '2016-09-16', '08:24:00', '2016-09-20 05:22:07', '530'),
-  (5, 'KE34MN36T', 'Lenic Njagi', '2016-09-15', '07:18:00', '2016-09-20 05:27:28', '405');
+INSERT INTO `mpesa` (`mpesa_id`, `mpesa_code`, `full_name`, `date`, `time`, `created_at`, `amount`, `phone_number`)
+VALUES
+  (1, 'ME34K53N2', 'KEVIN WAFULA', '2016-09-16', '08:24:00', '2016-09-20 05:22:07', '530', NULL),
+  (5, 'KE34MN36T', 'Lenic Njagi', '2016-09-15', '07:18:00', '2016-09-20 05:27:28', '405', NULL);
 
 -- --------------------------------------------------------
 
@@ -161,7 +166,8 @@ INSERT INTO `mpesa` (`mpesa_id`, `mpesa_code`, `full_name`, `date`, `time`, `cre
 CREATE TABLE `news` (
   `news_id`      INT(11)   NOT NULL,
   `news_details` TEXT,
-  `created_at`   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at`   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `username`     VARCHAR(50)        DEFAULT 'kevinwafula60@gmail.com'
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -170,8 +176,9 @@ CREATE TABLE `news` (
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`news_id`, `news_details`, `created_at`) VALUES
-  (1, 'There will be an annual thanks giving at the church on 16th Sep, 2016. All are welcome', '2016-09-20 07:30:36');
+INSERT INTO `news` (`news_id`, `news_details`, `created_at`, `username`) VALUES
+  (1, 'There will be an annual thanks giving at the church on 16th Sep, 2016. All are welcome', '2016-09-20 07:30:36',
+   'kevinwafula60@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -180,12 +187,12 @@ INSERT INTO `news` (`news_id`, `news_details`, `created_at`) VALUES
 --
 
 CREATE TABLE `payments` (
-  `id`             int(11)     NOT NULL,
-  `purpose`        varchar(25) NOT NULL,
-  `cash`           int(11)     NOT NULL DEFAULT '0',
-  `cheque`         int(11)     NOT NULL DEFAULT '0',
-  `forex`          int(11)     NOT NULL DEFAULT '0',
-  `receipt_status` tinyint(1)  NOT NULL DEFAULT '0',
+  `id`             INT(11)     NOT NULL,
+  `purpose`        VARCHAR(25) NOT NULL,
+  `cash`           INT(11)     NOT NULL DEFAULT '0',
+  `cheque`         INT(11)     NOT NULL DEFAULT '0',
+  `forex`          INT(11)     NOT NULL DEFAULT '0',
+  `receipt_status` TINYINT(1)  NOT NULL DEFAULT '0',
   `payment_date`   DATE        NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -228,21 +235,22 @@ CREATE TABLE `priviledges` (
 --
 
 CREATE TABLE `purposes` (
-  `purpose` varchar(50) NOT NULL
+  `purpose`  VARCHAR(50) NOT NULL,
+  `username` VARCHAR(50) DEFAULT 'kevinwafula60@gmail.com'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `purposes`
 --
 
-INSERT INTO `purposes` (`purpose`) VALUES
-('tithe'),
-('children'),
-('quarterlies'),
-('education'),
-('investment'),
-('world mission'),
-('building funds');
+INSERT INTO `purposes` (`purpose`, `username`) VALUES
+  ('tithe', 'kevinwafula60@gmail.com'),
+  ('children', 'kevinwafula60@gmail.com'),
+  ('quarterlies', 'kevinwafula60@gmail.com'),
+  ('education', 'kevinwafula60@gmail.com'),
+  ('investment', 'kevinwafula60@gmail.com'),
+  ('world mission', 'kevinwafula60@gmail.com'),
+  ('building funds', 'kevinwafula60@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -254,7 +262,8 @@ CREATE TABLE `roles` (
   `role_id`    INT(11)     NOT NULL,
   `role`       VARCHAR(20) NOT NULL,
   `added_by`   VARCHAR(50) NOT NULL,
-  `created_at` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `username`   VARCHAR(50)          DEFAULT 'kevinwafula60@gmail.com'
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -327,26 +336,30 @@ VALUES
 -- Indexes for table `details`
 --
 ALTER TABLE `details`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `details_users_username_fk` (`registrar`);
 
 --
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`event_id`);
+  ADD PRIMARY KEY (`event_id`),
+  ADD KEY `events_users_username_fk` (`username`);
 
 --
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
-  ADD PRIMARY KEY (`group_id`);
+  ADD PRIMARY KEY (`group_id`),
+  ADD KEY `groups_users_username_fk` (`username`);
 
 --
 -- Indexes for table `members`
 --
 ALTER TABLE `members`
   ADD PRIMARY KEY (`member_id`),
-  ADD KEY `members_groups_group_id_fk` (`group_id`);
+  ADD KEY `members_groups_group_id_fk` (`group_id`),
+  ADD KEY `members_users_username_fk` (`username`);
 
 --
 -- Indexes for table `mpesa`
@@ -358,7 +371,8 @@ ALTER TABLE `mpesa`
 -- Indexes for table `news`
 --
 ALTER TABLE `news`
-  ADD PRIMARY KEY (`news_id`);
+  ADD PRIMARY KEY (`news_id`),
+  ADD KEY `news_users_username_fk` (`username`);
 
 --
 -- Indexes for table `payments`
@@ -373,11 +387,18 @@ ALTER TABLE `priviledges`
   ADD KEY `fk_user_priviledges` (`username`);
 
 --
+-- Indexes for table `purposes`
+--
+ALTER TABLE `purposes`
+  ADD KEY `purposes_users_username_fk` (`username`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`role_id`),
-  ADD UNIQUE KEY `role` (`role`);
+  ADD UNIQUE KEY `role` (`role`),
+  ADD KEY `roles_users_username_fk` (`username`);
 
 --
 -- Indexes for table `users`
@@ -436,10 +457,35 @@ ALTER TABLE `roles`
 --
 
 --
+-- Constraints for table `details`
+--
+ALTER TABLE `details`
+  ADD CONSTRAINT `details_users_username_fk` FOREIGN KEY (`registrar`) REFERENCES `users` (`username`);
+
+--
+-- Constraints for table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_users_username_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
+
+--
+-- Constraints for table `groups`
+--
+ALTER TABLE `groups`
+  ADD CONSTRAINT `groups_users_username_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
+
+--
 -- Constraints for table `members`
 --
 ALTER TABLE `members`
-  ADD CONSTRAINT `members_groups_group_id_fk` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`);
+  ADD CONSTRAINT `members_groups_group_id_fk` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`),
+  ADD CONSTRAINT `members_users_username_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
+
+--
+-- Constraints for table `news`
+--
+ALTER TABLE `news`
+  ADD CONSTRAINT `news_users_username_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
 
 --
 -- Constraints for table `payments`
@@ -451,7 +497,20 @@ ALTER TABLE `payments`
 -- Constraints for table `priviledges`
 --
 ALTER TABLE `priviledges`
-  ADD CONSTRAINT `fk_user_priviledges` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
+  ADD CONSTRAINT `fk_user_priviledges` FOREIGN KEY (`username`) REFERENCES `users` (`username`),
+  ADD CONSTRAINT `priviledges_users_username_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
+
+--
+-- Constraints for table `purposes`
+--
+ALTER TABLE `purposes`
+  ADD CONSTRAINT `purposes_users_username_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
+
+--
+-- Constraints for table `roles`
+--
+ALTER TABLE `roles`
+  ADD CONSTRAINT `roles_users_username_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

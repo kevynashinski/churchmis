@@ -150,10 +150,10 @@
             return false;
         }
 
-        public static function saveMpesaTransaction($mpesaCode, $fullName, $amount, $date, $time)
+        public static function saveMpesaTransaction($mpesaCode, $fullName, $phoneNumber, $amount, $date, $time)
         {
             try {
-                $sql = "insert into mpesa(mpesa_code, full_name, date, time, amount) VALUES (?,?,?,?,?)";
+                $sql = "INSERT INTO mpesa(mpesa_code, full_name, date, time, amount,phone_number) VALUES (?,?,?,?,?,?)";
 
                 $stmt = self::$DB_CONN->prepare($sql);
                 $stmt->bindParam(1, $mpesaCode);
@@ -161,6 +161,7 @@
                 $stmt->bindParam(3, $date);
                 $stmt->bindParam(4, $time);
                 $stmt->bindParam(5, $amount);
+                $stmt->bindParam(6, $phoneNumber);
 
                 if ($stmt->execute()) {
                     return true;

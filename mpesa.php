@@ -11,14 +11,15 @@ include_once 'includes/session.php';
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
-    if (isset($_REQUEST[MPESA_CODE]) && isset($_REQUEST[FULL_NAME]) && isset($_REQUEST[AMOUNT]) && isset($_REQUEST[DATE]) && isset($_REQUEST[TIME])) {
+    if (isset($_REQUEST[MPESA_CODE]) && isset($_REQUEST[FULL_NAME]) && isset($_REQUEST[AMOUNT]) && isset($_REQUEST[FULL_NAME]) && isset($_REQUEST[DATE]) && isset($_REQUEST[TIME])) {
         $mpesaCode = $_REQUEST[MPESA_CODE];
         $fullName = $_REQUEST[FULL_NAME];
+        $phoneNumber = $_REQUEST[PHONE_NUMBER];
         $amount = $_REQUEST[AMOUNT];
         $date = $_REQUEST[DATE];
         $time = $_REQUEST[TIME];
 
-        if (db_operations::saveMpesaTransaction($mpesaCode, $fullName, $amount, $date, $time)) {
+        if (db_operations::saveMpesaTransaction($mpesaCode, $fullName, $phoneNumber, $amount, $date, $time)) {
             echo 0;
         } else {
             echo 1;

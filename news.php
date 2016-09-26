@@ -18,9 +18,7 @@ include_once 'includes/config.php';
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/bootstrap.css">
 
-
         <script type="application/javascript">
-
 
         </script>
 
@@ -85,7 +83,6 @@ include_once 'includes/config.php';
             <ul class="nav navbar-nav"></ul>
         </div><!--/.nav-collapse -->
     </div>
-    </nav>
 
     <div class="container">
         <div class="row">
@@ -94,7 +91,6 @@ include_once 'includes/config.php';
                 <h2 style="text-align:center;">concerning trip: </h2>
             </div>
         </div>
-
     </div>
 
     <div class="container">
