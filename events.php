@@ -63,6 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                     echo
                     '<li><a href="dashboard.php">DashBoard</a></li>
 <li><a href="mpesa.php">Mpesa Transactions</a></li>
+                <li><a href="news.php">News</a> </li>
                                 <li><a href="logout.php">Logout</a></li>
 ';
                 } else {

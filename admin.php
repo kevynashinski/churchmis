@@ -38,6 +38,9 @@ include_once 'includes/session.php';
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li><a href="dashboard.php">Hi, <?php echo $_SESSION['username'] ?></a></li>
+                <li class="active"><a href="admin.php">Admin</a></li>
+                <li><a href="events.php">Events</a></li>
+                <li><a href="news.php">News</a></li>
                 <li><a href="logout.php">Logout</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
             </ul>
@@ -63,30 +66,26 @@ include_once 'includes/session.php';
             <thead>
             <tr>
                 <th>#</th>
-                <th>NAME</th>
-                <th>PHONE NUMBER</th>
-                <th>PURPOSE</th>
-                <th>CASH (Ksh.)</th>
-                <th>CHEQUE (Ksh.)</th>
-                <th>FOREX</th>
-                <th>PAYMENT DATE</th>
+                <th>ID NUMBER</th>
+                <th>SURNAME</th>
+                <th>OTHER NAME</th>
+                <th>GENDER</th>
+                <th>EMAIL ADDRESS</th>
+                <th>REGISTERED DATE</th>
+                <th>PRIVILEGE</th>
             </tr>
             </thead>
             <tbody class="searchable">
             <?php
 
-                $sql = "SELECT d.id,d.full_name,d.phone_number,p.purpose,p.cash,p.cheque,p.forex,p.payment_date FROM details d,payments p WHERE p.id=d.id";
+            $sql = "SELECT * FROM users";
 
                 //get the view page number selected
-                if (isset($_GET['page_view'])) {
-                    $records_per_page = $_GET['page_view'];
-                    $newquery = db_operations::paging($sql, $records_per_page);
-                    db_operations::getAllUserData($newquery);
-                } else {
+
                     $records_per_page = 100;
                     $newquery = db_operations::paging($sql, $records_per_page);
-                    db_operations::getAllUserData($newquery);
-                }
+            db_operations::getUsers($newquery);
+
             ?>
             <tr>
                 <td colspan="9" align="center">

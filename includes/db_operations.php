@@ -150,6 +150,24 @@
             return false;
         }
 
+        public static function addNewsDetails($news_details)
+        {
+            try {
+                $sql_profile = "INSERT INTO news(news_details) VALUES (?)";
+
+                $stmt = self::$DB_CONN->prepare($sql_profile);
+                $stmt->bindParam(1, $news_details);
+
+                if ($stmt->execute()) {
+                    return true;
+                }
+
+            } catch (PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+            return false;
+        }
+
         public static function saveMpesaTransaction($mpesaCode, $fullName, $phoneNumber, $amount, $date, $time)
         {
             try {
@@ -172,15 +190,55 @@
             return false;
         }
 
-        public static function getUsers(){
-            try{
-                $query = "select id_number,surname,other_name,gender,username,registered_date,role from users";
-                $stmt=self::$DB_CONN->query($query);
-                $result=$stmt->fetch();
+        public static function getUsers($sql)
+        {
+            try {
+                $no = 1;
 
+                $result = self::$DB_CONN->query($sql);
 
-            }catch(PDOException $e){
-                echo 'Error: ' . $e->getMessage();
+                foreach ($result as $item) {
+                    echo ' 
+ <tr>
+                    <td>' . $no . '</td>
+			<td>' . $item[ID_NUMBER] . '</td>
+			<td>' . $item[SURNAME] . '</td>
+			<td>' . $item[OTHER_NAME] . '</td>
+			<td>' . $item[GENDER] . '</td>
+			<td>' . $item[USERNAME] . '</td>
+			<td>' . $item[REGISTERED_DATE] . '</td>
+			<td>' . $item[ROLE] . '</td>
+                    </tr>
+                    ';
+                    $no++;
+
+                }
+
+            } catch (PDOException $e) {
+                echo "Error " . $e->getMessage();
+            }
+        }
+
+        public static function getNews($sql)
+        {
+            try {
+                $no = 1;
+
+                $result = self::$DB_CONN->query($sql);
+
+                foreach ($result as $item) {
+                    echo ' 
+ <tr>
+                    <td>' . $no . '</td>
+			<td>' . $item[NEWS_DETAILS] . '</td>
+                    </tr>
+                    ';
+                    $no++;
+
+                }
+
+            } catch (PDOException $e) {
+                echo "Error " . $e->getMessage();
             }
         }
 
@@ -343,6 +401,8 @@
 			<td>' . $item[TIME] . '</td>
                     </tr>
                     ';
+                    $no++;
+
                 }
 
             } catch (PDOException $e) {
@@ -367,6 +427,7 @@
 			<td>' . $item[EVENT_END_DATE] . '</td>
                     </tr>
                     ';
+                    $no++;
                 }
 
             } catch (PDOException $e) {

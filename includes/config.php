@@ -26,6 +26,7 @@ define('USER', 'kevynashinski');
     define('PAYMENT_DATE', 'payment_date');
 
     define('USERNAME', 'username');
+define('REGISTERED_DATE', 'registered_date');
     define('PURPOSE_NUMBER', 'purposesNumber');
     define('SURNAME','surname');
     define('OTHER_NAME','other_name');
@@ -41,6 +42,7 @@ define("AMOUNT", "amount");
 
 define('EVENT_NAME', 'event_name');
 define('VENUE', 'venue');
+define('NEWS_DETAILS', 'news_details');
 define('EVENT_START_DATE', 'start_date');
 define('EVENT_END_DATE', 'end_date');
 
