@@ -20,6 +20,33 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $time = $_REQUEST[TIME];
 
         if (db_operations::saveMpesaTransaction($mpesaCode, $fullName, $phoneNumber, $amount, $date, $time)) {
+
+            // send the message
+            $username = "nashinski";
+            $apikey = "7cb6e97640c56fa68af4a8f5ceecff5ce32123b0d9d3e4b29cd181039b01db71";
+
+            $recipients = $phoneNumber;
+
+            $message = 'Thank you ' . $fullName . ' for your contribution of ' . $amount . ' on ' . $date . '\n Dial *384*5612# to update your the purpose of your contribution';
+
+            $gateway = new AfricasTalkingGateway($username, $apikey);
+
+
+            try {
+                // Thats it, hit send and we'll take care of the rest.
+                $results = $gateway->sendMessage($recipients, $message);
+
+//                foreach($results as $result) {
+                // status is either "Success" or "error message"
+//                    echo " Number: " .$result->number;
+//                    echo " Status: " .$result->status;
+//                    echo " MessageId: " .$result->messageId;
+//                    echo " Cost: "   .$result->cost."\n";
+//                }
+            } catch (AfricasTalkingGatewayException $e) {
+//                echo "Encountered an error while sending: ".$e->getMessage();
+            }
+
             echo 0;
         } else {
             echo 1;
@@ -29,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     }
 
 } else {
-//    echo 'Post only';
+    echo 'Post only';
 }
 ?>
 

@@ -51,7 +51,7 @@ include_once 'includes/session.php';
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
-            <h1 style="text-align:center; font-size:4em;">Welcome to MyGalaxy</h1>
+            <h1 style="text-align:center; font-size:4em;">Welcome to ChurchMIS</h1>
             <h3 style="text-align:center">Users</h3>
         </div>
     </div>
